@@ -1,0 +1,6 @@
+framework module Pods_SolutisTeste_SolutisTesteUITests {
+  umbrella header "Pods-SolutisTeste-SolutisTesteUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
