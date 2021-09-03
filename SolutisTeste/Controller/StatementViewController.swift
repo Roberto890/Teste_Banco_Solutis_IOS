@@ -10,7 +10,7 @@ import SVProgressHUD
 import UIKit
 
 class StatementViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, APIResquestDelegate {
-    
+
     var apiRequest: APIRequest? = APIRequest()
     var statementRequest: [StatementData] = []
     var userLogedData: UserData?
@@ -23,7 +23,10 @@ class StatementViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         loadUserData()
+        apiRequest?.delegate = self
+        SVProgressHUD.show()
         loadStatementData()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,28 +41,39 @@ class StatementViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func loadStatementData(){
-        SVProgressHUD.show()
         apiRequest?.statement((userLogedData?.token)!)
     }
+
+    //MARK:- API RESPONSE
     
     func didRequestSuccess(_: APIRequest, data: Any) {
         DispatchQueue.main.sync {
-            let statementData = data as! Array<StatementAPI>
+            let statementData = data as! [StatementAPI]
             for statement in statementData{
                 let statementConverter: StatementData = StatementData()
                 statementConverter.populate(statement)
                 self.statementRequest.append(statementConverter)
-                SVProgressHUD.dismiss()
             }
-            
+            statementTable.reloadData()
+            SVProgressHUD.dismiss()
         }
     }
     
     func didRequestFailed(_: APIRequest, error: Error) {
-        print(error)
-        SVProgressHUD.dismiss()
+        DispatchQueue.main.sync {
+            print(error)
+            SVProgressHUD.dismiss()
+        }
     }
     
+    func didResponseFailed(_: APIRequest, response: HTTPURLResponse) {
+        DispatchQueue.main.sync {
+            print(response)
+            SVProgressHUD.dismiss()
+        }
+    }
+    
+    //MARK:- Table view populating
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return statementRequest.count
@@ -68,8 +82,11 @@ class StatementViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = statementTable.dequeueReusableCell(withIdentifier: "statementCell", for: indexPath) as! CardCellViewController
         
+        if ((statementRequest[indexPath.row].value)!) < 0{
+            print("arrumar a cor etc")
+        }
         cell.lblDate.text = statementRequest[indexPath.row].date
-        cell.lblValue.text = "\(String(describing: statementRequest[indexPath.row].value))"
+        cell.lblValue.text = "\((statementRequest[indexPath.row].value)!)"
         cell.lblType.text = "teste"
         cell.lblDescription.text = statementRequest[indexPath.row].description
         

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,7 @@
 		BAB5D6C626E1025400423531 /* CardCellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5D6C526E1025400423531 /* CardCellViewController.swift */; };
 		BAB5D6C826E104C900423531 /* StatementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5D6C726E104C900423531 /* StatementViewController.swift */; };
 		BAB5D6CA26E12D0600423531 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5D6C926E12D0600423531 /* UserData.swift */; };
+		BAB5D6D926E29DE000423531 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5D6D826E29DE000423531 /* Utils.swift */; };
 		C4F4766D26D02380000DF719 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F4766C26D02380000DF719 /* AppDelegate.swift */; };
 		C4F4766F26D02380000DF719 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F4766E26D02380000DF719 /* SceneDelegate.swift */; };
 		C4F4767126D02380000DF719 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F4767026D02380000DF719 /* LoginViewController.swift */; };
@@ -56,6 +57,7 @@
 		BAB5D6C526E1025400423531 /* CardCellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCellViewController.swift; sourceTree = "<group>"; };
 		BAB5D6C726E104C900423531 /* StatementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementViewController.swift; sourceTree = "<group>"; };
 		BAB5D6C926E12D0600423531 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		BAB5D6D826E29DE000423531 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		C4F4766926D02380000DF719 /* SolutisTeste.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SolutisTeste.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4F4766C26D02380000DF719 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C4F4766E26D02380000DF719 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -118,7 +120,6 @@
 			isa = PBXGroup;
 			children = (
 				BAB5D6C326E019EB00423531 /* UserModel.swift */,
-				BAB5D6C926E12D0600423531 /* UserData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -126,6 +127,7 @@
 		BA00B79A26DDB69B0060FC37 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				BAB5D6C926E12D0600423531 /* UserData.swift */,
 				C4F4767226D02380000DF719 /* Main.storyboard */,
 			);
 			path = View;
@@ -134,6 +136,7 @@
 		BA00B79B26DDB69F0060FC37 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				BAB5D6C526E1025400423531 /* CardCellViewController.swift */,
 				C4F4767026D02380000DF719 /* LoginViewController.swift */,
 				BAB5D6C726E104C900423531 /* StatementViewController.swift */,
 			);
@@ -146,6 +149,14 @@
 				BAB5D6BF26E0130C00423531 /* APIRequest.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		BAB5D6D726E29DCB00423531 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				BAB5D6D826E29DE000423531 /* Utils.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		C4F4766026D02380000DF719 = {
@@ -173,11 +184,11 @@
 		C4F4766B26D02380000DF719 /* SolutisTeste */ = {
 			isa = PBXGroup;
 			children = (
+				BAB5D6D726E29DCB00423531 /* Utils */,
 				BAB5D6BE26E011ED00423531 /* Services */,
 				BA00B79B26DDB69F0060FC37 /* Controller */,
 				BA00B79A26DDB69B0060FC37 /* View */,
 				BA00B79926DDB68F0060FC37 /* Model */,
-				BAB5D6C526E1025400423531 /* CardCellViewController.swift */,
 				C4F4766E26D02380000DF719 /* SceneDelegate.swift */,
 				C4F4766C26D02380000DF719 /* AppDelegate.swift */,
 				C4F4767526D02381000DF719 /* Assets.xcassets */,
@@ -455,6 +466,7 @@
 			files = (
 				C4F4767126D02380000DF719 /* LoginViewController.swift in Sources */,
 				BAB5D6C626E1025400423531 /* CardCellViewController.swift in Sources */,
+				BAB5D6D926E29DE000423531 /* Utils.swift in Sources */,
 				BAB5D6CA26E12D0600423531 /* UserData.swift in Sources */,
 				BAB5D6C426E019EB00423531 /* UserModel.swift in Sources */,
 				BAB5D6C826E104C900423531 /* StatementViewController.swift in Sources */,

@@ -33,7 +33,7 @@ class StatementData {
     var value: Double!
     
     func populate(_ statementData: StatementAPI) {
-        self.date = statementData.descricao
+        self.date = statementData.data
         self.description = statementData.descricao
         self.value = statementData.valor
     }

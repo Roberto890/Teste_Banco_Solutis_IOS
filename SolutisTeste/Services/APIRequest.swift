@@ -10,6 +10,7 @@ import Foundation
 protocol APIResquestDelegate {
     func didRequestSuccess(_: APIRequest, data: Any)
     func didRequestFailed(_: APIRequest, error: Error)
+    func didResponseFailed(_: APIRequest, response: HTTPURLResponse)
 }
 
 struct APIRequest {
@@ -38,16 +39,22 @@ struct APIRequest {
                     delegate?.didRequestFailed(self, error: error!)
                 }
                 
-                do{
-                    
-                    let jsonResponse = try JSONDecoder().decode(UserAPI.self, from: data!)
-                    
-                    delegate?.didRequestSuccess(self, data: jsonResponse)
-                    
-                }catch{
-                    delegate?.didRequestFailed(self, error: error)
+                guard let response = response as? HTTPURLResponse else{
+                    return
                 }
                 
+                if response.statusCode == 200 {
+                    do{
+                        let jsonResponse = try JSONDecoder().decode(UserAPI.self, from: data!)
+                        
+                        delegate?.didRequestSuccess(self, data: jsonResponse)
+                        
+                    }catch{
+                        delegate?.didRequestFailed(self, error: error)
+                    }
+                }else{
+                    delegate?.didResponseFailed(self, response: response)
+                }
             }
             dataTask.resume()
         }
@@ -55,31 +62,38 @@ struct APIRequest {
     
     func statement(_ token: String) {
         do {
-            
             let resourceString = "https://api.mobile.test.solutis.xyz/extrato"
             guard let resourceURL = URL(string: resourceString) else { fatalError()}
             
             var urlRequest = URLRequest(url: resourceURL)
             urlRequest.httpMethod = "GET"
-            
-            urlRequest.addValue(token, forHTTPHeaderField: "Token")
+            urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            urlRequest.addValue(token, forHTTPHeaderField: "token")
             
             let dataTask = URLSession.shared.dataTask(with: urlRequest) {(
                 data, response, error) in guard data != nil else {return}
                 
-                if (error != nil){
+                if(error != nil){
                     print(error!)
                     delegate?.didRequestFailed(self, error: error!)
                 }
                 
-                do{
-                    let jsonResponse = try JSONDecoder().decode([StatementAPI].self, from: data!)
-                    
-                    delegate?.didRequestSuccess(self, data: jsonResponse)
-                    
-                }catch{
-                    print(error)
-                    delegate?.didRequestFailed(self, error: error)
+                guard let response = response as? HTTPURLResponse else{
+                    return
+                }
+                
+                if response.statusCode == 200{
+                    do{
+                        let jsonResponse = try JSONDecoder().decode([StatementAPI].self, from: data!)
+                        
+                        delegate?.didRequestSuccess(self, data: jsonResponse)
+                        
+                    }catch{
+                        print(error)
+                        delegate?.didRequestFailed(self, error: error)
+                    }
+                }else{
+                    delegate?.didResponseFailed(self, response: response)
                 }
             }
             dataTask.resume()

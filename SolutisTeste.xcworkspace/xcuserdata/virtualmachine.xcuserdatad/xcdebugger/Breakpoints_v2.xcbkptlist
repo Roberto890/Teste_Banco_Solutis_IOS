@@ -71,112 +71,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "8B7C7241-08CC-44ED-BB9E-05C1C9484755"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SolutisTeste/Services/APIRequest.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
-            landmarkName = "statement(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "8B7C7241-08CC-44ED-BB9E-05C1C9484755 - eb8d0a30fe87e0c6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "SolutisTeste.APIRequest.statement(Swift.String) -&gt; ()"
-                  moduleName = "SolutisTeste"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/virtualmachine/Documents/Roberto%20Workspace/Teste_Banco_Solutis_IOS/SolutisTeste/Services/APIRequest.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "67"
-                  endingLineNumber = "67"
-                  offsetFromSymbolStart = "738">
-               </Location>
-               <Location
-                  uuid = "8B7C7241-08CC-44ED-BB9E-05C1C9484755 - 66c18c7befd30cd0"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in SolutisTeste.APIRequest.statement(Swift.String) -&gt; ()"
-                  moduleName = "SolutisTeste"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/virtualmachine/Documents/Roberto%20Workspace/Teste_Banco_Solutis_IOS/SolutisTeste/Services/APIRequest.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "68"
-                  endingLineNumber = "68"
-                  offsetFromSymbolStart = "186">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "46D9FAE6-8F36-47EA-AD0B-C4D92C42FB5F"
+            uuid = "B9BD74ED-FC78-4FE1-8A60-3521DE0B863A"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SolutisTeste/Controller/StatementViewController.swift"
+            filePath = "SolutisTeste/Controller/LoginViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
-            landmarkName = "didRequestSuccess(_:data:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "72E843C7-70EA-4ABA-A1E8-2C8E73574639"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SolutisTeste/Services/APIRequest.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
-            landmarkName = "statement(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "145757E5-AF52-4B23-8E3D-0E1A850DA07D"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SolutisTeste/Services/APIRequest.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
-            landmarkName = "statement(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "7226A927-5CE9-4A9C-AE1F-6D60F732EC64"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SolutisTeste/Controller/StatementViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
-            landmarkName = "didRequestFailed(_:error:)"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "btnLogin(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
