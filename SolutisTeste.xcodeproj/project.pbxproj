@@ -119,6 +119,7 @@
 		BA00B79926DDB68F0060FC37 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				BAB5D6DD26E6A8B100423531 /* Data */,
 				BAB5D6C326E019EB00423531 /* UserModel.swift */,
 			);
 			path = Model;
@@ -127,7 +128,6 @@
 		BA00B79A26DDB69B0060FC37 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				BAB5D6C926E12D0600423531 /* UserData.swift */,
 				C4F4767226D02380000DF719 /* Main.storyboard */,
 			);
 			path = View;
@@ -157,6 +157,14 @@
 				BAB5D6D826E29DE000423531 /* Utils.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		BAB5D6DD26E6A8B100423531 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				BAB5D6C926E12D0600423531 /* UserData.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		C4F4766026D02380000DF719 = {

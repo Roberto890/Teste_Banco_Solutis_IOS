@@ -15,12 +15,4 @@ class CardCellViewController: UITableViewCell{
     @IBOutlet weak var lblDate: UILabel!
     @IBOutlet weak var lblValue: UILabel!
     
-    func addCard(statement: StatementData){
-        
-        lblDescription.text = statement.description
-        lblDate.text = statement.date
-        lblValue.text = "\(statement.value)"
-        
-    }
-    
 }

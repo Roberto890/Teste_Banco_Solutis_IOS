@@ -1,16 +1,24 @@
 PODS:
+  - JMMaskTextField-Swift (0.1.3)
+  - KeychainAccess (4.2.2)
   - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
+  - JMMaskTextField-Swift
+  - KeychainAccess
   - SVProgressHUD (= 2.2.5)
 
 SPEC REPOS:
   trunk:
+    - JMMaskTextField-Swift
+    - KeychainAccess
     - SVProgressHUD
 
 SPEC CHECKSUMS:
+  JMMaskTextField-Swift: 16aa552605b121285e6c2f0817ab31cea5f4704b
+  KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 638713e4b8862da96a14c5f8c557a9c48d31ee1e
+PODFILE CHECKSUM: 5f9d7eed059d4cf49dbd40719f9850f9db95c0f4
 
 COCOAPODS: 1.10.2

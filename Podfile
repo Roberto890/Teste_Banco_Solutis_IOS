@@ -8,6 +8,8 @@ target 'SolutisTeste' do
   # Pods for SolutisTeste
 
   pod 'SVProgressHUD', '2.2.5'
+  pod 'JMMaskTextField-Swift'
+  pod 'KeychainAccess'
 
   target 'SolutisTesteTests' do
     inherit! :search_paths

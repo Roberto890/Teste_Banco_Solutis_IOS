@@ -9,16 +9,18 @@ import Foundation
 import SVProgressHUD
 import UIKit
 
-class StatementViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, APIResquestDelegate {
+class StatementViewController: UIViewController {
 
     var apiRequest: APIRequest? = APIRequest()
     var statementRequest: [StatementData] = []
     var userLogedData: UserData?
+    var viewsCount: Int = 0
     
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblCpfCnpj: UILabel!
     @IBOutlet weak var lblBalance: UILabel!
     @IBOutlet weak var statementTable: UITableView!
+    @IBOutlet weak var viewBackground: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,20 +33,39 @@ class StatementViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func viewWillAppear(_ animated: Bool) {
         super .viewWillAppear(true)
-        self.navigationController?.navigationBar.isHidden = false
+        self.navigationController?.navigationBar.isHidden = true
+        Utils().setGradientBackground(viewBackground)
     }
     
+    @IBAction func btnLogout(_ sender: Any) {
+        doLogout()
+    }
+}
+
+// MARK:- Functions
+extension StatementViewController{
+    
     func loadUserData() {
-        lblName.text = userLogedData?.name
-        lblCpfCnpj.text = userLogedData?.cpf
-        lblBalance.text = "\(String(describing: userLogedData?.balance))"
+        lblName.text = "Olá, \((userLogedData?.name)!)"
+        lblCpfCnpj.text = Utils().cpfCnpjMask(cpfCnpj: (userLogedData?.cpf)!)
+        lblBalance.text = "\(Utils().moneyFormatter(value: (userLogedData!.balance)))"
     }
     
     func loadStatementData(){
         apiRequest?.statement((userLogedData?.token)!)
     }
+    
+    func doLogout(){
+        let alert = UIAlertController(title: "Logout", message: "Realmente deseja deslogar?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancelar", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Sair", style: .destructive, handler: {_ in
+                                        self.navigationController?.popViewController(animated: true)}))
+        self.present(alert, animated: true, completion: nil)
+    }
+}
 
     //MARK:- API RESPONSE
+extension StatementViewController: APIResquestDelegate{
     
     func didRequestSuccess(_: APIRequest, data: Any) {
         DispatchQueue.main.sync {
@@ -72,30 +93,36 @@ class StatementViewController: UIViewController, UITableViewDelegate, UITableVie
             SVProgressHUD.dismiss()
         }
     }
-    
+}
+
     //MARK:- Table view populating
+extension StatementViewController: UITableViewDelegate, UITableViewDataSource{
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return statementRequest.count
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 5
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = statementTable.dequeueReusableCell(withIdentifier: "statementCell", for: indexPath) as! CardCellViewController
+        var cell = statementTable.dequeueReusableCell(withIdentifier: "statementCell", for: indexPath) as! CardCellViewController
         
-        if ((statementRequest[indexPath.row].value)!) < 0{
-            print("arrumar a cor etc")
+        if (statementRequest.count >= viewsCount+1) {
+            cell = Utils().formatCellValues(statement: statementRequest[viewsCount], cell: cell)
+            viewsCount += 1
         }
-        cell.lblDate.text = statementRequest[indexPath.row].date
-        cell.lblValue.text = "\((statementRequest[indexPath.row].value)!)"
-        cell.lblType.text = "teste"
-        cell.lblDescription.text = statementRequest[indexPath.row].description
-        
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let size = CGFloat(tableView.frame.size.height / 4)
-        return size
+        return 85
     }
     
 }
+
