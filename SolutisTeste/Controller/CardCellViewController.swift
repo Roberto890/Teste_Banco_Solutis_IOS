@@ -14,5 +14,6 @@ class CardCellViewController: UITableViewCell{
     @IBOutlet weak var lblDescription: UILabel!
     @IBOutlet weak var lblDate: UILabel!
     @IBOutlet weak var lblValue: UILabel!
+    @IBOutlet weak var cellView: UIView!
     
 }

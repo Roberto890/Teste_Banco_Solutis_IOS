@@ -40,6 +40,7 @@ class LoginViewController: UIViewController {
         self.btnLogin.isEnabled = false
         guard let login = txtUsername.text else{return}
         guard let password = txtPassword.text else{return}
+        keyChainDelete()
         doLogin(login, password)
     }
     
@@ -83,10 +84,8 @@ extension LoginViewController {
             let alert = UIAlertController(title: "Aviso", message: "A biometria estará ativa na proxima tentativa de login", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
-            
-        }else if (swtEmail.isOn == false || swtBiometric.isOn == false){
-            keyChainDelete()
         }
+        
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

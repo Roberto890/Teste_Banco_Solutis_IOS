@@ -179,7 +179,7 @@
                                 <color key="separatorColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="statementCell" rowHeight="85" id="35Z-G3-XNW" customClass="CardCellViewController" customModule="SolutisTeste" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="statementCell" id="35Z-G3-XNW" customClass="CardCellViewController" customModule="SolutisTeste" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="24.5" width="374" height="85"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="35Z-G3-XNW" id="w8P-if-qg6">
@@ -187,7 +187,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SP2-gj-mCN">
-                                                    <rect key="frame" x="0.0" y="0.0" width="371" height="81"/>
+                                                    <rect key="frame" x="0.0" y="5" width="374" height="76"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pagamento" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Uh-Tq-h8a" userLabel="lblType">
                                                             <rect key="frame" x="10" y="0.0" width="78" height="21"/>
@@ -196,19 +196,19 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01/01/2020" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1sM-sY-L24" userLabel="lblDate">
-                                                            <rect key="frame" x="282" y="0.0" width="79" height="21"/>
+                                                            <rect key="frame" x="285" y="0.0" width="79" height="21"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
                                                             <color key="textColor" red="0.65490196079999996" green="0.65490196079999996" blue="0.6705882353" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- R$ 150.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aIr-Nf-HQk" userLabel="lblValue">
-                                                            <rect key="frame" x="264" y="46" width="97" height="25"/>
+                                                            <rect key="frame" x="267" y="41" width="97" height="25"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="18"/>
                                                             <color key="textColor" red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pagamento Conta" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ziJ-rJ-Qe7" userLabel="lblDescription">
-                                                            <rect key="frame" x="10" y="46" width="152" height="25"/>
+                                                            <rect key="frame" x="10" y="41" width="152" height="25"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="18"/>
                                                             <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -216,6 +216,7 @@
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
+                                                        <constraint firstItem="ziJ-rJ-Qe7" firstAttribute="top" secondItem="6Uh-Tq-h8a" secondAttribute="bottom" constant="20" id="1xJ-KX-dwq"/>
                                                         <constraint firstAttribute="trailing" secondItem="aIr-Nf-HQk" secondAttribute="trailing" constant="10" id="3UA-Bm-0sQ"/>
                                                         <constraint firstItem="ziJ-rJ-Qe7" firstAttribute="leading" secondItem="SP2-gj-mCN" secondAttribute="leading" constant="10" id="Cyc-34-1Ke"/>
                                                         <constraint firstItem="aIr-Nf-HQk" firstAttribute="centerY" secondItem="ziJ-rJ-Qe7" secondAttribute="centerY" id="DM2-O9-dzS"/>
@@ -227,15 +228,16 @@
                                                     </constraints>
                                                 </view>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.72156862745098038" green="0.72156862745098038" blue="0.72156862745098038" alpha="0.5298013245033113" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="SP2-gj-mCN" secondAttribute="trailing" constant="3" id="G5P-K4-Uck"/>
-                                                <constraint firstItem="SP2-gj-mCN" firstAttribute="top" secondItem="w8P-if-qg6" secondAttribute="top" id="XR9-QF-h2b"/>
+                                                <constraint firstAttribute="trailing" secondItem="SP2-gj-mCN" secondAttribute="trailing" id="G5P-K4-Uck"/>
+                                                <constraint firstItem="SP2-gj-mCN" firstAttribute="top" secondItem="w8P-if-qg6" secondAttribute="top" constant="5" id="XR9-QF-h2b"/>
                                                 <constraint firstAttribute="bottom" secondItem="SP2-gj-mCN" secondAttribute="bottom" constant="4" id="c5f-XW-9Oz"/>
                                                 <constraint firstItem="SP2-gj-mCN" firstAttribute="leading" secondItem="w8P-if-qg6" secondAttribute="leading" id="jab-I0-4OM"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
+                                            <outlet property="cellView" destination="SP2-gj-mCN" id="tni-4C-3hA"/>
                                             <outlet property="lblDate" destination="1sM-sY-L24" id="bhe-sY-TeJ"/>
                                             <outlet property="lblDescription" destination="ziJ-rJ-Qe7" id="Hsb-Zi-UAc"/>
                                             <outlet property="lblType" destination="6Uh-Tq-h8a" id="ZPb-6w-vr9"/>

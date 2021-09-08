@@ -98,30 +98,16 @@ extension StatementViewController: APIResquestDelegate{
     //MARK:- Table view populating
 extension StatementViewController: UITableViewDelegate, UITableViewDataSource{
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return statementRequest.count
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 5
+        return statementRequest.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = statementTable.dequeueReusableCell(withIdentifier: "statementCell", for: indexPath) as! CardCellViewController
+
+        cell = Utils().formatCellValues(statement: statementRequest[indexPath.row], cell: cell)
         
-        if (statementRequest.count >= viewsCount+1) {
-            cell = Utils().formatCellValues(statement: statementRequest[viewsCount], cell: cell)
-            viewsCount += 1
-        }
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 85
     }
     
 }

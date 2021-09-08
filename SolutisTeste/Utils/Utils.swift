@@ -42,6 +42,12 @@ class Utils{
     
     func formatCellValues(statement: StatementData, cell: CardCellViewController) -> CardCellViewController {
         
+        cell.cellView.layer.shadowColor = UIColor.black.cgColor
+        cell.cellView.layer.shadowPath = UIBezierPath(rect: cell.cellView.bounds).cgPath
+        cell.cellView.layer.shadowRadius = 5
+        cell.cellView.layer.shadowOffset = CGSize(width: 0, height: 3)
+        cell.cellView.layer.shadowOpacity = 0.5
+        
         cell.lblDate.text = dateFormatter(date: statement.date)
         cell.lblDescription.text = statement.description
         cell.layer.cornerRadius = 5
