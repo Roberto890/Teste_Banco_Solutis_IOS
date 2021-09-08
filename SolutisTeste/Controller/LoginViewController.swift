@@ -48,6 +48,14 @@ class LoginViewController: UIViewController {
         swtVerifications(type: "Email")
     }
     
+    @IBAction func dismissKeyboardTop(_ sender: Any) {
+        self.view.endEditing(true)
+    }
+    
+    @IBAction func dismissKeyboardMiddle(_ sender: Any) {
+        self.view.endEditing(true)
+    }
+    
     @IBAction func swtBiometricChanged(_ sender: Any) {
         swtVerifications(type: "Biometric")
     }
@@ -56,7 +64,7 @@ class LoginViewController: UIViewController {
     // MARK:- Login Functions and Segue
 extension LoginViewController {
     func doLogin(_ login: String,_ password: String){
-        if (Utils().isValidEmail(email: login) == true && Utils().isValidPassword(password: password) == true){
+        if ((Utils().isValidEmail(email: login) == true || Utils().isValidCpfCnpj(login) ==  true)) && Utils().isValidPassword(password: password) == true {
             SVProgressHUD.show()
             apiRequest?.login(login, password)
         }else{
@@ -166,8 +174,9 @@ extension LoginViewController: APIResquestDelegate{
                 let alert = UIAlertController(title: "Aviso", message: "Credenciais inválidas", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
                 self.present(alert, animated: true, completion: nil)
+            }else {
+                self.txtError.isHidden = false
             }
-            self.txtError.isHidden = false
             SVProgressHUD.dismiss()
             self.btnLogin.isEnabled = true
         }

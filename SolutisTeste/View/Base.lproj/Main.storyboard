@@ -28,10 +28,14 @@
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" red="0.96078431372549022" green="0.96470588235294119" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstItem="Swg-VD-KK5" firstAttribute="centerX" secondItem="Ilo-do-cGl" secondAttribute="centerX" id="4Ry-1b-VL5"/>
                                             <constraint firstItem="Swg-VD-KK5" firstAttribute="centerY" secondItem="Ilo-do-cGl" secondAttribute="centerY" id="qe3-rW-ODk"/>
                                         </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="jFg-Wd-JmV" appends="YES" id="gZL-Zc-bcG"/>
+                                        </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CZV-Jo-Jr0" userLabel="Middle">
                                         <rect key="frame" x="0.0" y="272.5" width="414" height="273"/>
@@ -64,8 +68,8 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Usuario ou senha inválidos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O9F-3g-mLG">
-                                                <rect key="frame" x="30" y="30" width="202.5" height="20.5"/>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login ou senha inválidos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O9F-3g-mLG">
+                                                <rect key="frame" x="30" y="30" width="186" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="1" green="0.033006924454713871" blue="0.13113300054420152" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -83,8 +87,8 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" restorationIdentifier="swtBiometric" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qdf-lJ-Ozq">
-                                                <rect key="frame" x="332" y="233" width="51" height="31"/>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" restorationIdentifier="swtBiometric" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qdf-lJ-Ozq">
+                                                <rect key="frame" x="332" y="234" width="51" height="31"/>
                                                 <color key="onTintColor" name="AccentColor"/>
                                                 <connections>
                                                     <action selector="swtBiometricChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="pyP-ra-osC"/>
@@ -92,6 +96,7 @@
                                             </switch>
                                         </subviews>
                                         <color key="backgroundColor" red="0.96078431372549022" green="0.96470588235294119" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="CsA-pZ-uWM" secondAttribute="trailing" constant="33" id="0jW-Ca-iW4"/>
                                             <constraint firstItem="O9F-3g-mLG" firstAttribute="top" secondItem="CZV-Jo-Jr0" secondAttribute="top" constant="30" id="552-ex-DIr"/>
@@ -114,6 +119,9 @@
                                             <constraint firstItem="P0h-es-T9s" firstAttribute="leading" secondItem="CZV-Jo-Jr0" secondAttribute="leading" constant="30" id="vi1-sD-5It"/>
                                             <constraint firstItem="dhn-mt-6E3" firstAttribute="top" secondItem="P0h-es-T9s" secondAttribute="bottom" constant="24" id="w7B-Uy-t5y"/>
                                         </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="ioH-wg-e0C" appends="YES" id="nUO-Co-ypf"/>
+                                        </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uMO-F3-yw2" userLabel="Bot">
                                         <rect key="frame" x="0.0" y="545.5" width="414" height="272.5"/>
@@ -132,6 +140,7 @@
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.96078431372549022" green="0.96470588235294119" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstItem="FTW-uz-57h" firstAttribute="centerX" secondItem="uMO-F3-yw2" secondAttribute="centerX" id="ocd-2k-ift"/>
                                             <constraint firstItem="FTW-uz-57h" firstAttribute="centerY" secondItem="uMO-F3-yw2" secondAttribute="centerY" id="r6k-i6-hxd"/>
@@ -162,6 +171,16 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="jFg-Wd-JmV">
+                    <connections>
+                        <action selector="dismissKeyboardTop:" destination="BYZ-38-t0r" id="P7l-ju-SuQ"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="ioH-wg-e0C">
+                    <connections>
+                        <action selector="dismissKeyboardMiddle:" destination="BYZ-38-t0r" id="wDT-My-xcu"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="814.49275362318849" y="102.45535714285714"/>
         </scene>

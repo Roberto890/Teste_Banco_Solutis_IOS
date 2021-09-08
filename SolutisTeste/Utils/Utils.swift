@@ -7,10 +7,17 @@
 
 import Foundation
 import JMMaskTextField_Swift
+import CPF_CNPJ_Validator
 import UIKit
 
     // MARK:- Validations and cell formatter
 class Utils{
+    
+    func isValidCpfCnpj(_ cpfCnpj: String) -> Bool{
+        let cpf = BooleanValidator().validate(cpfCnpj, kind: .CPF)
+        let cnpj = BooleanValidator().validate(cpfCnpj, kind: .CNPJ)
+        return cpf || cnpj
+    }
     
     func isValidEmail(email: String) -> Bool{
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"

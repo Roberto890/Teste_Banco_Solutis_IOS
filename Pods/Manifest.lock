@@ -1,24 +1,28 @@
 PODS:
+  - CPF-CNPJ-Validator (1.0.2)
   - JMMaskTextField-Swift (0.1.3)
   - KeychainAccess (4.2.2)
   - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
+  - CPF-CNPJ-Validator
   - JMMaskTextField-Swift
   - KeychainAccess
   - SVProgressHUD (= 2.2.5)
 
 SPEC REPOS:
   trunk:
+    - CPF-CNPJ-Validator
     - JMMaskTextField-Swift
     - KeychainAccess
     - SVProgressHUD
 
 SPEC CHECKSUMS:
+  CPF-CNPJ-Validator: 0b08069595da2c4b20e964b743bfc0a7334d5347
   JMMaskTextField-Swift: 16aa552605b121285e6c2f0817ab31cea5f4704b
   KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 5f9d7eed059d4cf49dbd40719f9850f9db95c0f4
+PODFILE CHECKSUM: 2aba4fc6d0aed50362da85d934e42b8f895e142c
 
 COCOAPODS: 1.10.2
