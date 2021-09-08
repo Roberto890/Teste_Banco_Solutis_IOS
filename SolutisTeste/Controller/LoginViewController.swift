@@ -56,6 +56,7 @@ class LoginViewController: UIViewController {
 extension LoginViewController {
     func doLogin(_ login: String,_ password: String){
         if (Utils().isValidEmail(email: login) == true && Utils().isValidPassword(password: password) == true){
+            SVProgressHUD.show()
             apiRequest?.login(login, password)
         }else{
             txtError.isHidden = false
@@ -69,7 +70,7 @@ extension LoginViewController {
             if (type == "Email") {
                 message = "Caso não queria salvar o email desabilite a opção Habilitar Biometria antes do Salvar email"
             }else{
-                message = "Para habilitar a biometria a opção Salvar Email tem que estar Habilitada, a mesma sera ativa no proximo login"
+                message = "A biometria estará ativa na proxima tentativa de login"
             }
             
             let alert = UIAlertController(title: "Aviso", message: message, preferredStyle: .alert)
@@ -78,8 +79,7 @@ extension LoginViewController {
             self.present(alert, animated: true, completion: nil)
             swtEmail.isOn = true
             
-        }
-        if(swtBiometric.isOn == true){
+        }else if(swtBiometric.isOn == true){
             let alert = UIAlertController(title: "Aviso", message: "A biometria estará ativa na proxima tentativa de login", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
@@ -163,7 +163,11 @@ extension LoginViewController: APIResquestDelegate{
     
     func didResponseFailed(_: APIRequest, response: HTTPURLResponse) {
         DispatchQueue.main.async {
-            print(response)
+            if (response.statusCode == 401) {
+                let alert = UIAlertController(title: "Aviso", message: "Credenciais inválidas", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
             self.txtError.isHidden = false
             SVProgressHUD.dismiss()
             self.btnLogin.isEnabled = true
