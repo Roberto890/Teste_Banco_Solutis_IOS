@@ -28,8 +28,6 @@ class StatementViewController: UIViewController {
         apiRequest?.delegate = self
         SVProgressHUD.show()
         loadStatementData()
-//        NotificationCenter.default.addObserver(self, selector: (self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: (self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
     }
     
@@ -64,19 +62,6 @@ extension StatementViewController{
                                         self.navigationController?.popViewController(animated: true)}))
         self.present(alert, animated: true, completion: nil)
     }
-    
-//    func keyboardWillShow(notification:NSNotification) {
-//        guard let keyboardFrameValue = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue else {
-//            return
-//        }
-//        let keyboardFrame = view.convert(keyboardFrameValue.cgRectValue, from: nil)
-//        scrollView.contentOffset = CGPoint(x:0, y:keyboardFrame.size.height)
-//    }
-//
-//    func keyboardWillHide(notification:NSNotification) {
-//        scrollView.contentOffset = .zero
-//    }
-    
 }
 
     //MARK:- API RESPONSE
