@@ -132,6 +132,11 @@
                                                     <constraint firstAttribute="height" constant="50" id="tqR-av-HY9"/>
                                                 </constraints>
                                                 <state key="normal" title="Login"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <integer key="value" value="22"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="btnLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7J8-YL-coU"/>
                                                 </connections>
@@ -185,7 +190,7 @@
         <!--Statement View Controller-->
         <scene sceneID="Pp2-1o-Vu8">
             <objects>
-                <viewController id="Qhu-xW-gRO" customClass="StatementViewController" customModule="SolutisTeste" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StatementViewController" id="Qhu-xW-gRO" customClass="StatementViewController" customModule="SolutisTeste" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PAG-WA-H4n">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -13,12 +13,24 @@
 		BAB5D6C026E0130C00423531 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5D6BF26E0130C00423531 /* APIRequest.swift */; };
 		BAB5D6C426E019EB00423531 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5D6C326E019EB00423531 /* UserModel.swift */; };
 		BAB5D6C626E1025400423531 /* CardCellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5D6C526E1025400423531 /* CardCellViewController.swift */; };
-		BAB5D6C826E104C900423531 /* StatementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5D6C726E104C900423531 /* StatementViewController.swift */; };
-		BAB5D6CA26E12D0600423531 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5D6C926E12D0600423531 /* UserData.swift */; };
+		BAB5D6C826E104C900423531 /* oldStatementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5D6C726E104C900423531 /* oldStatementViewController.swift */; };
+		BAB5D6CA26E12D0600423531 /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5D6C926E12D0600423531 /* UserDataModel.swift */; };
 		BAB5D6D926E29DE000423531 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5D6D826E29DE000423531 /* Utils.swift */; };
+		BACF36A626F36DE700AB5F03 /* StatementPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACF36A026F36DE700AB5F03 /* StatementPresenter.swift */; };
+		BACF36A726F36DE700AB5F03 /* StatementWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACF36A126F36DE700AB5F03 /* StatementWorker.swift */; };
+		BACF36A826F36DE700AB5F03 /* StatementRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACF36A226F36DE700AB5F03 /* StatementRouter.swift */; };
+		BACF36A926F36DE700AB5F03 /* StatementModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACF36A326F36DE700AB5F03 /* StatementModels.swift */; };
+		BACF36AA26F36DE700AB5F03 /* StatementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACF36A426F36DE700AB5F03 /* StatementViewController.swift */; };
+		BACF36AB26F36DE700AB5F03 /* StatementInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACF36A526F36DE700AB5F03 /* StatementInteractor.swift */; };
+		BACF36B226F36E0300AB5F03 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACF36AC26F36E0300AB5F03 /* LoginPresenter.swift */; };
+		BACF36B326F36E0300AB5F03 /* LoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACF36AD26F36E0300AB5F03 /* LoginWorker.swift */; };
+		BACF36B426F36E0300AB5F03 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACF36AE26F36E0300AB5F03 /* LoginRouter.swift */; };
+		BACF36B526F36E0300AB5F03 /* LoginModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACF36AF26F36E0300AB5F03 /* LoginModels.swift */; };
+		BACF36B626F36E0300AB5F03 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACF36B026F36E0300AB5F03 /* LoginViewController.swift */; };
+		BACF36B726F36E0300AB5F03 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACF36B126F36E0300AB5F03 /* LoginInteractor.swift */; };
 		C4F4766D26D02380000DF719 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F4766C26D02380000DF719 /* AppDelegate.swift */; };
 		C4F4766F26D02380000DF719 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F4766E26D02380000DF719 /* SceneDelegate.swift */; };
-		C4F4767126D02380000DF719 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F4767026D02380000DF719 /* LoginViewController.swift */; };
+		C4F4767126D02380000DF719 /* oldLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F4767026D02380000DF719 /* oldLoginViewController.swift */; };
 		C4F4767426D02380000DF719 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4F4767226D02380000DF719 /* Main.storyboard */; };
 		C4F4767626D02381000DF719 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4F4767526D02381000DF719 /* Assets.xcassets */; };
 		C4F4767926D02381000DF719 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4F4767726D02381000DF719 /* LaunchScreen.storyboard */; };
@@ -55,13 +67,25 @@
 		BAB5D6BF26E0130C00423531 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		BAB5D6C326E019EB00423531 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		BAB5D6C526E1025400423531 /* CardCellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCellViewController.swift; sourceTree = "<group>"; };
-		BAB5D6C726E104C900423531 /* StatementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementViewController.swift; sourceTree = "<group>"; };
-		BAB5D6C926E12D0600423531 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		BAB5D6C726E104C900423531 /* oldStatementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = oldStatementViewController.swift; sourceTree = "<group>"; };
+		BAB5D6C926E12D0600423531 /* UserDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
 		BAB5D6D826E29DE000423531 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		BACF36A026F36DE700AB5F03 /* StatementPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementPresenter.swift; sourceTree = "<group>"; };
+		BACF36A126F36DE700AB5F03 /* StatementWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementWorker.swift; sourceTree = "<group>"; };
+		BACF36A226F36DE700AB5F03 /* StatementRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementRouter.swift; sourceTree = "<group>"; };
+		BACF36A326F36DE700AB5F03 /* StatementModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementModels.swift; sourceTree = "<group>"; };
+		BACF36A426F36DE700AB5F03 /* StatementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementViewController.swift; sourceTree = "<group>"; };
+		BACF36A526F36DE700AB5F03 /* StatementInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementInteractor.swift; sourceTree = "<group>"; };
+		BACF36AC26F36E0300AB5F03 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
+		BACF36AD26F36E0300AB5F03 /* LoginWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWorker.swift; sourceTree = "<group>"; };
+		BACF36AE26F36E0300AB5F03 /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
+		BACF36AF26F36E0300AB5F03 /* LoginModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModels.swift; sourceTree = "<group>"; };
+		BACF36B026F36E0300AB5F03 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		BACF36B126F36E0300AB5F03 /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
 		C4F4766926D02380000DF719 /* SolutisTeste.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SolutisTeste.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4F4766C26D02380000DF719 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C4F4766E26D02380000DF719 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C4F4767026D02380000DF719 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		C4F4767026D02380000DF719 /* oldLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = oldLoginViewController.swift; sourceTree = "<group>"; };
 		C4F4767326D02380000DF719 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C4F4767526D02381000DF719 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C4F4767826D02381000DF719 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -119,7 +143,7 @@
 		BA00B79926DDB68F0060FC37 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				BAB5D6DD26E6A8B100423531 /* Data */,
+				BAB5D6C926E12D0600423531 /* UserDataModel.swift */,
 				BAB5D6C326E019EB00423531 /* UserModel.swift */,
 			);
 			path = Model;
@@ -128,19 +152,22 @@
 		BA00B79A26DDB69B0060FC37 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C4F4766E26D02380000DF719 /* SceneDelegate.swift */,
+				C4F4767726D02381000DF719 /* LaunchScreen.storyboard */,
 				C4F4767226D02380000DF719 /* Main.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
 		};
-		BA00B79B26DDB69F0060FC37 /* Controller */ = {
+		BA00B79B26DDB69F0060FC37 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				BAB5D6C526E1025400423531 /* CardCellViewController.swift */,
-				C4F4767026D02380000DF719 /* LoginViewController.swift */,
-				BAB5D6C726E104C900423531 /* StatementViewController.swift */,
+				BACF369F26F36D9500AB5F03 /* Statement */,
+				BACF369E26F36D8E00AB5F03 /* Login */,
+				C4F4767026D02380000DF719 /* oldLoginViewController.swift */,
+				BAB5D6C726E104C900423531 /* oldStatementViewController.swift */,
 			);
-			path = Controller;
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 		BAB5D6BE26E011ED00423531 /* Services */ = {
@@ -159,12 +186,48 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		BAB5D6DD26E6A8B100423531 /* Data */ = {
+		BACF369D26F36C2D00AB5F03 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				BAB5D6C926E12D0600423531 /* UserData.swift */,
+				C4F4767526D02381000DF719 /* Assets.xcassets */,
+				C4F4766C26D02380000DF719 /* AppDelegate.swift */,
 			);
-			path = Data;
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		BACF369E26F36D8E00AB5F03 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				BACF36B026F36E0300AB5F03 /* LoginViewController.swift */,
+				BACF36B126F36E0300AB5F03 /* LoginInteractor.swift */,
+				BACF36AC26F36E0300AB5F03 /* LoginPresenter.swift */,
+				BACF36AD26F36E0300AB5F03 /* LoginWorker.swift */,
+				BACF36AE26F36E0300AB5F03 /* LoginRouter.swift */,
+				BACF36AF26F36E0300AB5F03 /* LoginModels.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		BACF369F26F36D9500AB5F03 /* Statement */ = {
+			isa = PBXGroup;
+			children = (
+				BACF36B826F372BB00AB5F03 /* View */,
+				BACF36A426F36DE700AB5F03 /* StatementViewController.swift */,
+				BACF36A526F36DE700AB5F03 /* StatementInteractor.swift */,
+				BACF36A026F36DE700AB5F03 /* StatementPresenter.swift */,
+				BACF36A126F36DE700AB5F03 /* StatementWorker.swift */,
+				BACF36A226F36DE700AB5F03 /* StatementRouter.swift */,
+				BACF36A326F36DE700AB5F03 /* StatementModels.swift */,
+			);
+			path = Statement;
+			sourceTree = "<group>";
+		};
+		BACF36B826F372BB00AB5F03 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BAB5D6C526E1025400423531 /* CardCellViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		C4F4766026D02380000DF719 = {
@@ -192,15 +255,12 @@
 		C4F4766B26D02380000DF719 /* SolutisTeste */ = {
 			isa = PBXGroup;
 			children = (
+				BACF369D26F36C2D00AB5F03 /* Resources */,
 				BAB5D6D726E29DCB00423531 /* Utils */,
 				BAB5D6BE26E011ED00423531 /* Services */,
-				BA00B79B26DDB69F0060FC37 /* Controller */,
-				BA00B79A26DDB69B0060FC37 /* View */,
 				BA00B79926DDB68F0060FC37 /* Model */,
-				C4F4766E26D02380000DF719 /* SceneDelegate.swift */,
-				C4F4766C26D02380000DF719 /* AppDelegate.swift */,
-				C4F4767526D02381000DF719 /* Assets.xcassets */,
-				C4F4767726D02381000DF719 /* LaunchScreen.storyboard */,
+				BA00B79B26DDB69F0060FC37 /* Scenes */,
+				BA00B79A26DDB69B0060FC37 /* View */,
 				C4F4767A26D02381000DF719 /* Info.plist */,
 			);
 			path = SolutisTeste;
@@ -472,14 +532,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C4F4767126D02380000DF719 /* LoginViewController.swift in Sources */,
+				BACF36B226F36E0300AB5F03 /* LoginPresenter.swift in Sources */,
+				C4F4767126D02380000DF719 /* oldLoginViewController.swift in Sources */,
+				BACF36B726F36E0300AB5F03 /* LoginInteractor.swift in Sources */,
 				BAB5D6C626E1025400423531 /* CardCellViewController.swift in Sources */,
+				BACF36B326F36E0300AB5F03 /* LoginWorker.swift in Sources */,
+				BACF36A826F36DE700AB5F03 /* StatementRouter.swift in Sources */,
+				BACF36A626F36DE700AB5F03 /* StatementPresenter.swift in Sources */,
+				BACF36AA26F36DE700AB5F03 /* StatementViewController.swift in Sources */,
+				BACF36A726F36DE700AB5F03 /* StatementWorker.swift in Sources */,
+				BACF36B626F36E0300AB5F03 /* LoginViewController.swift in Sources */,
 				BAB5D6D926E29DE000423531 /* Utils.swift in Sources */,
-				BAB5D6CA26E12D0600423531 /* UserData.swift in Sources */,
+				BAB5D6CA26E12D0600423531 /* UserDataModel.swift in Sources */,
 				BAB5D6C426E019EB00423531 /* UserModel.swift in Sources */,
-				BAB5D6C826E104C900423531 /* StatementViewController.swift in Sources */,
+				BAB5D6C826E104C900423531 /* oldStatementViewController.swift in Sources */,
+				BACF36A926F36DE700AB5F03 /* StatementModels.swift in Sources */,
+				BACF36B526F36E0300AB5F03 /* LoginModels.swift in Sources */,
 				C4F4766D26D02380000DF719 /* AppDelegate.swift in Sources */,
+				BACF36B426F36E0300AB5F03 /* LoginRouter.swift in Sources */,
 				BAB5D6C026E0130C00423531 /* APIRequest.swift in Sources */,
+				BACF36AB26F36DE700AB5F03 /* StatementInteractor.swift in Sources */,
 				C4F4766F26D02380000DF719 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

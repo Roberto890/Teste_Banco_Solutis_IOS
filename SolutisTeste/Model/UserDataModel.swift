@@ -7,24 +7,16 @@
 
 import Foundation
 
-class UserLogin {
-    var login: String!
-    var password: String!
+struct UserLogin {
+    var login: String
+    var password: String
 }
 
-class UserData {
-    var name: String!
-    var cpf: String!
-    var balance: Double!
-    var token: String!
-    
-    func populate(_ userData: UserAPI) {
-        self.name = userData.nome
-        self.cpf = userData.cpf
-        self.balance = userData.saldo
-        self.token = userData.token
-    }
-    
+struct UserData {
+    var name: String
+    var cpf: String
+    var balance: Double
+    var token: String
 }
 
 class StatementData {
