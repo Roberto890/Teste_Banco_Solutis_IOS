@@ -126,7 +126,7 @@ extension LoginViewController {
                     self?.doLogin(self!.txtUsername.text!, self!.txtPassword.text!)
                 }
             }
-        }else{
+        } else {
             let alert = UIAlertController(title: "FaceID ou Biometria", message: "Desculpe está feature esta indisponível para este aparelho, Porfavor habilite nas configurações", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
             present(alert, animated: true, completion: nil)
