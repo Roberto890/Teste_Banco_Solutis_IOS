@@ -53,7 +53,7 @@ class LoginPresenter: LoginPresentationLogic {
     }
     
     func presentBiometricVerification(_ user: UserLogin) {
-        let user = Login.loginView.ViewModel(user: user)
+        let user = Login.biometricVerification.ViewModel(user: user)
         viewController?.displayBiometricVerification(user: user)
     }
     

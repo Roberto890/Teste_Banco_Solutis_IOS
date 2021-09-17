@@ -14,9 +14,9 @@ import UIKit
 
 protocol LoginBusinessLogic {
     func doLogin(request: Login.doLogin.Request)
-    func viewLoad(request: Login.loginView.Request)
+    func keyChainVerification(request: Login.loginView.Request)
     func swtVerifications(request: Login.swtVerification.Request)
-    func biometricVerification()
+    func biometricVerification(request: Login.biometricVerification.Request)
 }
 
 protocol LoginDataStore {
@@ -45,7 +45,7 @@ class LoginInteractor: LoginBusinessLogic, LoginDataStore {
         }
     }
     
-    func viewLoad(request: Login.loginView.Request) {
+    func keyChainVerification(request: Login.loginView.Request) {
         worker = LoginWorker()
         worker?.keyChainVerification(request.switchLogin, request.switchBiometric){ result in
             switch result{
@@ -71,9 +71,9 @@ class LoginInteractor: LoginBusinessLogic, LoginDataStore {
         }
     }
     
-    func biometricVerification() {
+    func biometricVerification(request: Login.biometricVerification.Request) {
         worker = LoginWorker()
-        worker?.biometricVerification(){result in
+        worker?.biometricVerification(context: request.context){result in
             switch result{
                 case.success(let userLogin):
                     self.presenter?.presentBiometricVerification(.init(login: userLogin.login, password: userLogin.password))

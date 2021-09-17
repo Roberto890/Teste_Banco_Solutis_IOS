@@ -114,3 +114,15 @@ extension Utils{
     
 }
 
+// MARK:- ALERTS CREATOR
+
+extension Utils {
+    func showAlert(_ message: String, ui: UIViewController){
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "Aviso", message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            ui.present(alert, animated: true, completion: nil)
+        }
+    }
+}
+

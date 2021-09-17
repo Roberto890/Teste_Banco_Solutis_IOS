@@ -11,6 +11,7 @@
 //
 
 import UIKit
+import LocalAuthentication
 
 enum Login {
     // MARK: Use cases
@@ -58,6 +59,20 @@ enum Login {
         
         struct ViewModel {
             let message: String
+        }
+    }
+    
+    enum biometricVerification {
+        struct Request {
+            let context: LAContext
+        }
+        
+        struct Response {
+            let message: String
+        }
+        
+        struct ViewModel {
+            let user: UserLogin
         }
     }
 }

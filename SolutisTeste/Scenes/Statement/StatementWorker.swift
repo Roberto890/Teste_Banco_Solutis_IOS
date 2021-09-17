@@ -11,8 +11,34 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class StatementWorker {
-    func doSomeWork() {
+    
+    func formatUserData(user: UserData) -> UserFormated {
+        
+        let userBalance = Utils().moneyFormatter(value: user.balance)
+        let userCpf = Utils().cpfCnpjMask(cpfCnpj: user.cpf)
+        let userName = user.name
+        let userToken = user.token
+        
+        let userFormated = UserFormated(name: userName, cpf: userCpf, balance: userBalance, token: userToken)
+        
+        return userFormated
+    }
+    
+    func loadStatement(token: String, completionHandler: @escaping(Result<[StatementData], Error>) -> Void) {
+        
+        SVProgressHUD.show()
+        
+        APIRequest().loadStatement(token){ result in
+            switch result{
+            case.success(let result):
+                completionHandler(.success(result))
+            case.failure(let error):
+                completionHandler(.failure(error))
+            }
+            
+        }
     }
 }

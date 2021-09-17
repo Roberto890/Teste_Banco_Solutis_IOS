@@ -25,4 +25,30 @@ enum Statement {
         struct ViewModel {
         }
     }
+    
+    enum loadUser {
+        struct Request {
+        }
+        
+        struct Response {
+            let user: UserFormated
+        }
+        
+        struct ViewModel {
+            let user: UserFormated
+        }
+    }
+    
+    enum loadStatement {
+        struct Request {
+        }
+        
+        struct Response {
+            let statement: [StatementData]
+        }
+        
+        struct ViewModel {
+            let statement: [StatementData]
+        }
+    }
 }

@@ -21,16 +21,13 @@ protocol StatementDataPassing {
 }
 
 class StatementRouter: NSObject, StatementRoutingLogic, StatementDataPassing {
-    func routeToLogin(segue: UIStoryboardSegue?) {
-        // MARK: TEM QUE PASSAR OS DADOS DO LOGIN
-    }
-    
+
     weak var viewController: StatementViewController?
     var dataStore: StatementDataStore?
     
     // MARK: Routing
     
-    func routeToSomewhere(segue: UIStoryboardSegue?) {
+    func routeToLogin(segue: UIStoryboardSegue?) {
         if let segue = segue {
             let destinationVC = segue.destination as! LoginViewController
             var destinationDS = destinationVC.router!.dataStore!

@@ -59,7 +59,7 @@ struct APIRequest {
         }
     }
     
-    func statement(_ token: String) {
+    func loadStatement(_ token: String, completionHandler: @escaping(Result<[StatementData], Error>) -> Void) {
         do {
             let resourceString = "https://api.mobile.test.solutis.xyz/extrato"
             guard let resourceURL = URL(string: resourceString) else { fatalError()}
@@ -74,25 +74,30 @@ struct APIRequest {
                 
                 if(error != nil){
                     print(error!)
-//                    delegate?.didRequestFailed(self, error: error!)
+                    completionHandler(.failure(APIErros.invalidAPICall))
                 }
                 
-                guard let response = response as? HTTPURLResponse else{
-                    return
-                }
-                
-                if response.statusCode == 200{
-                    do{
-                        let jsonResponse = try JSONDecoder().decode([StatementAPI].self, from: data!)
-                        
-//                        delegate?.didRequestSuccess(self, data: jsonResponse)
-                        
-                    }catch{
-                        print(error)
-//                        delegate?.didRequestFailed(self, error: error)
+                if (response != nil){
+                    let apiResponse = response as! HTTPURLResponse
+                    if apiResponse.statusCode != 200 {
+                        print("api status response: \(apiResponse.statusCode)")
                     }
-                }else{
-//                    delegate?.didResponseFailed(self, response: response)
+                }
+                
+                do{
+                    if let statement = data {
+                        let jsonResponse = try JSONDecoder().decode([StatementAPI].self, from: statement)
+                        var statementsData: [StatementData] = []
+                        
+                        for value in jsonResponse {
+                            let statement = StatementData(date: value.data, description: value.descricao, value: value.valor)
+                            statementsData.append(statement)
+                        }
+                        
+                        completionHandler(.success(statementsData))
+                    }
+                } catch {
+                    completionHandler(.failure(APIErros.parseError))
                 }
             }
             dataTask.resume()

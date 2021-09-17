@@ -12,6 +12,7 @@
 
 import UIKit
 import SVProgressHUD
+import LocalAuthentication
 
 protocol LoginDisplayLogic: AnyObject {
     func displayUserData(viewModel: Login.doLogin.ViewModel)
@@ -19,7 +20,7 @@ protocol LoginDisplayLogic: AnyObject {
     func displayKeyChainData(userLogin: Login.loginView.ViewModel)
     func displaySwtError(error: String)
     func displaySwtVerification(message: String)
-    func displayBiometricVerification(user: Login.loginView.ViewModel)
+    func displayBiometricVerification(user: Login.biometricVerification.ViewModel)
     func displayBiometricError(error: String)
 }
 
@@ -76,9 +77,8 @@ class LoginViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         let viewRequest = Login.loginView.Request(switchLogin: swtEmail.isOn, switchBiometric: swtBiometric.isOn)
+        interactor?.keyChainVerification(request: viewRequest)
         self.navigationController?.navigationBar.isHidden = true
-        interactor?.viewLoad(request: viewRequest)
-        interactor?.biometricVerification()
     }
     
     // MARK: IBOutlets
@@ -100,7 +100,7 @@ class LoginViewController: UIViewController {
     }
     
     func doLogin(user: UserLogin, swtLogin: UISwitch, swtBiometric: UISwitch){
-        let request = Login.doLogin.Request(user: user, switchLogin: swtLogin.isHidden, switchBiometric: swtBiometric.isOn)
+        let request = Login.doLogin.Request(user: user, switchLogin: swtEmail.isOn, switchBiometric: swtBiometric.isOn)
         interactor?.doLogin(request: request)
     }
     
@@ -123,18 +123,18 @@ class LoginViewController: UIViewController {
     @IBAction func dismissKeyboardMiddle(_ sender: Any) {
         self.view.endEditing(true)
     }
-    
-    func showAlert(_ message: String){
-        let alert = UIAlertController(title: "Aviso", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
+//
+//    func showAlert(_ message: String){
+//        let alert = UIAlertController(title: "Aviso", message: message, preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+//        self.present(alert, animated: true, completion: nil)
+//    }
     
 }
 
     //MARK:- TEXT FIELD Implementations
 extension LoginViewController: UITextFieldDelegate{
-
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool{
         txtError.isHidden = true
         return true
@@ -146,9 +146,9 @@ extension LoginViewController: LoginDisplayLogic{
    
     func displayUserData(viewModel: Login.doLogin.ViewModel) {
         DispatchQueue.main.async {
+            self.router?.routeToStatement(segue: nil)
             SVProgressHUD.dismiss()
             self.btnLogin.isEnabled = true
-            self.router?.routeToStatement(segue: nil)
         }
     }
     
@@ -162,6 +162,7 @@ extension LoginViewController: LoginDisplayLogic{
     
     func displayKeyChainData(userLogin: Login.loginView.ViewModel ) {
         DispatchQueue.main.async {
+            let context = LAContext()
             self.txtUsername.text = userLogin.user.login
             self.txtPassword.text = userLogin.user.password
             if self.txtUsername.text != "" {
@@ -170,7 +171,9 @@ extension LoginViewController: LoginDisplayLogic{
                 self.swtEmail.isOn = false
             }
             if self.txtPassword.text != "" {
+                let request = Login.biometricVerification.Request(context: context)
                 self.swtBiometric.isOn = true
+                self.interactor?.biometricVerification(request: request)
             }else {
                 self.swtBiometric.isOn = false
             }
@@ -179,19 +182,19 @@ extension LoginViewController: LoginDisplayLogic{
     
     func displaySwtError(error: String) {
         DispatchQueue.main.async {
-            self.showAlert(error)
+            Utils().showAlert(error, ui: self)
             self.swtEmail.isOn = true
         }
     }
     
     func displaySwtVerification(message: String) {
         DispatchQueue.main.async {
-            self.showAlert(message)
+            Utils().showAlert(message, ui: self)
             self.swtEmail.isOn = true
         }
     }
     
-    func displayBiometricVerification(user: Login.loginView.ViewModel) {
+    func displayBiometricVerification(user: Login.biometricVerification.ViewModel) {
         DispatchQueue.main.async {
             let swtLogin = self.swtEmail!
             swtLogin.isOn = true
@@ -203,7 +206,8 @@ extension LoginViewController: LoginDisplayLogic{
     
     func displayBiometricError(error: String) {
         DispatchQueue.main.async {
-            self.showAlert(error)
+            Utils().showAlert(error, ui: self)
+            self.swtBiometric.isOn = false
         }
     }
 }

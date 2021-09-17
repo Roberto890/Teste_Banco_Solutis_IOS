@@ -11,12 +11,17 @@
 //
 
 import UIKit
+import SVProgressHUD
 
-protocol StatementDisplayLogic: class {
+protocol StatementDisplayLogic: AnyObject {
     func displayDoLogout(viewModel: Statement.doLogout.ViewModel)
+    func displayUserData(loadUser: Statement.loadUser.ViewModel)
+    func displayLoadStatement(statementData: Statement.loadStatement.ViewModel)
+    func displayLoadStatementError(error: String)
 }
 
-class StatementViewController: UIViewController, StatementDisplayLogic {
+class StatementViewController: UIViewController {
+    
     var interactor: StatementBusinessLogic?
     var router: (NSObjectProtocol & StatementRoutingLogic & StatementDataPassing)?
     
@@ -62,6 +67,11 @@ class StatementViewController: UIViewController, StatementDisplayLogic {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadGradient()
+        let requestLoadUser = Statement.loadUser.Request()
+        interactor?.loadUserData(request: requestLoadUser)
+        let requestLoadStatement = Statement.loadStatement.Request()
+        interactor?.loadStatement(request: requestLoadStatement)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,16 +85,56 @@ class StatementViewController: UIViewController, StatementDisplayLogic {
     @IBOutlet weak var lblBalance: UILabel!
     @IBOutlet weak var statementTable: UITableView!
     @IBOutlet weak var viewBackground: UIView!
+    
+    var statementRequest: [StatementData] = []
         
     // MARK: Do something
     
     @IBAction func btnLogout(_ sender: Any) {
-        let request = Statement.doLogout.Request()
-        interactor?.doLogout(request: request)
+        showAlertLogout()
     }
+    
+    func loadGradient(){
+        Utils().setGradientBackground(self.viewBackground)
+    }
+    
+    func showAlertLogout(){
+        let alert = UIAlertController(title: "Logout", message: "Realmente deseja deslogar?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancelar", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Sair", style: .destructive, handler: {_ in
+                                        self.navigationController?.popViewController(animated: true)}))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+}
+
+// MARK: - DISPLAY LOGIC
+
+extension StatementViewController: StatementDisplayLogic{
     
     func displayDoLogout(viewModel: Statement.doLogout.ViewModel) {
         
+    }
+    
+    func displayUserData(loadUser: Statement.loadUser.ViewModel) {
+        DispatchQueue.main.async { [self] in
+            lblName.text = "Olá, \(loadUser.user.name)"
+            lblCpfCnpj.text = loadUser.user.cpf
+            lblBalance.text = loadUser.user.balance
+        }
+    }
+    
+    func displayLoadStatement(statementData: Statement.loadStatement.ViewModel) {
+        DispatchQueue.main.async { [self] in
+            SVProgressHUD.dismiss()
+            statementRequest = statementData.statement
+            statementTable.reloadData()
+        }
+    }
+    
+    func displayLoadStatementError(error: String) {
+        SVProgressHUD.dismiss()
+        Utils().showAlert(error, ui: self)
     }
 }
 
@@ -92,13 +142,13 @@ class StatementViewController: UIViewController, StatementDisplayLogic {
 extension StatementViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return statementRequest.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = statementTable.dequeueReusableCell(withIdentifier: "statementCell", for: indexPath) as! CardCellViewController
         
-//        cell = Utils().formatCellValues(statement: statementRequest[indexPath.row], cell: cell)
+        cell = Utils().formatCellValues(statement: statementRequest[indexPath.row], cell: cell)
         
         return cell
     }

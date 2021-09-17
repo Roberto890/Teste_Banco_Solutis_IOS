@@ -97,8 +97,7 @@ class LoginWorker {
 
 // MARK:- Biometric And FaceID
 extension LoginWorker {
-    func biometricVerification(completionHandler: @escaping (Result<UserLogin, Error>) -> Void){
-        let context = LAContext()
+    func biometricVerification(context: LAContext,completionHandler: @escaping (Result<UserLogin, Error>) -> Void){
         var error: NSError? = nil
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error){
             let reason = "Porfavor autorize com a biometria!"
@@ -115,15 +114,8 @@ extension LoginWorker {
                 return
             }
         } else {
-            
             completionHandler(.failure(LoginWorkerErrors.biometricUnavailable))
             return
-//            let alert = UIAlertController(title: "FaceID ou Biometria", message: "Desculpe está feature esta indisponível para este aparelho, Porfavor habilite nas configurações", preferredStyle: .alert)
-//            alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
-//            present(alert, animated: true, completion: nil)
-//            swtBiometric.isOn = false
-
-
         }
     }
 }

@@ -14,9 +14,13 @@ import UIKit
 
 protocol StatementPresentationLogic {
     func presentSomething(response: Statement.doLogout.Response)
+    func presentUserData(response: Statement.loadUser.Response)
+    func presentLoadStatement(response: Statement.loadStatement.Response)
+    func presentLoadStatementError(_ error: String)
 }
 
 class StatementPresenter: StatementPresentationLogic {
+   
     weak var viewController: StatementDisplayLogic?
     
     // MARK: Do something
@@ -25,4 +29,18 @@ class StatementPresenter: StatementPresentationLogic {
         let viewModel = Statement.doLogout.ViewModel()
         viewController?.displayDoLogout(viewModel: viewModel)
     }
+    
+    func presentUserData(response: Statement.loadUser.Response) {
+        let loadUser = Statement.loadUser.ViewModel(user: response.user)
+        viewController?.displayUserData(loadUser: loadUser)
+    }
+    
+    func presentLoadStatement(response: Statement.loadStatement.Response) {
+        let loadStatement = Statement.loadStatement.ViewModel(statement: response.statement)
+        viewController?.displayLoadStatement(statementData: loadStatement)
+    }
+    func presentLoadStatementError(_ error: String) {
+        viewController?.displayLoadStatementError(error: error)
+    }
+    
 }

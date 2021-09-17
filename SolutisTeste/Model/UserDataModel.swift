@@ -19,15 +19,16 @@ struct UserData {
     var token: String
 }
 
-class StatementData {
-    var date: String!
-    var description: String!
-    var value: Double!
-    
-    func populate(_ statementData: StatementAPI) {
-        self.date = statementData.data
-        self.description = statementData.descricao
-        self.value = statementData.valor
-    }
-
+struct UserFormated{
+    var name: String
+    var cpf: String
+    var balance: String
+    var token: String
 }
+
+struct StatementData {
+    var date: String
+    var description: String
+    var value: Double
+}
+

@@ -14,6 +14,8 @@ import UIKit
 
 protocol StatementBusinessLogic {
     func doLogout(request: Statement.doLogout.Request)
+    func loadUserData(request: Statement.loadUser.Request)
+    func loadStatement(request: Statement.loadStatement.Request)
 }
 
 protocol StatementDataStore {
@@ -21,20 +23,43 @@ protocol StatementDataStore {
 }
 
 class StatementInteractor: StatementBusinessLogic, StatementDataStore {
-    
+   
     var presenter: StatementPresentationLogic?
     var worker: StatementWorker?
     var userData: UserData?
     
     // MARK: Do something
     
-    func doLogout(request: Statement.doLogout.Request) {
-        worker = StatementWorker()
-        worker?.doSomeWork()
-        
+    func doLogout(request: Statement.doLogout.Request) {        
         let response = Statement.doLogout.Response()
         presenter?.presentSomething(response: response)
         
     }
+    
+    func loadUserData(request: Statement.loadUser.Request) {
+        
+        worker = StatementWorker()
+        let userFormated = worker?.formatUserData(user: userData!)
+        
+        let user = Statement.loadUser.Response(user: userFormated!)
+        presenter?.presentUserData(response: user)
+    }
+    
+    func loadStatement(request: Statement.loadStatement.Request) {
+        worker = StatementWorker()
+        let token = userData?.token
+        worker?.loadStatement(token: token!){ result in
+            switch result {
+            case.success(let result):
+                let statementData = Statement.loadStatement.Response(statement: result)
+                self.presenter?.presentLoadStatement(response: statementData)
+                break
+            case.failure(let error):
+                self.presenter?.presentLoadStatementError(error.localizedDescription)
+            }
+            
+        }
+    }
+    
 }
 
