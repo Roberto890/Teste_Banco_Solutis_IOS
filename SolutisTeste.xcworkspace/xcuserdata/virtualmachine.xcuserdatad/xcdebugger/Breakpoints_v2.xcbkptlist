@@ -62,8 +62,8 @@
             filePath = "SolutisTeste/Scenes/Login/LoginWorker.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
             landmarkName = "biometricVerification(context:completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>

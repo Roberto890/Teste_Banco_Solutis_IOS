@@ -12,6 +12,7 @@
 
 import UIKit
 
+    //MARK:- Presenter Protocols - called in interactor
 protocol StatementPresentationLogic {
     func presentSomething(response: Statement.doLogout.Response)
     func presentUserData(response: Statement.loadUser.Response)
@@ -21,10 +22,10 @@ protocol StatementPresentationLogic {
 
 class StatementPresenter: StatementPresentationLogic {
    
+    //MARK:- Interactor Variables
     weak var viewController: StatementDisplayLogic?
     
-    // MARK: Do something
-    
+    // MARK:- Interactor functions(reicive interactor/ pass to viewController)
     func presentSomething(response: Statement.doLogout.Response) {
         let viewModel = Statement.doLogout.ViewModel()
         viewController?.displayDoLogout(viewModel: viewModel)

@@ -12,6 +12,7 @@
 
 import UIKit
 
+    //MARK:- Presenter Protocols - called in interactor
 protocol LoginPresentationLogic {
     func presentUserData(_ response: Login.doLogin.Response)
     func presentLoginError(_ error: String )
@@ -24,10 +25,10 @@ protocol LoginPresentationLogic {
 
 class LoginPresenter: LoginPresentationLogic {
     
+    //MARK:- Interactor Variables
     var viewController: LoginDisplayLogic?
     
-    // MARK: Do something
-    
+    // MARK:- Interactor functions(reicive interactor/ pass to viewController)
     func presentUserData(_ response: Login.doLogin.Response) {
         let viewModel = Login.doLogin.ViewModel(user: response.user)
         viewController?.displayUserData(viewModel: viewModel)
@@ -43,12 +44,10 @@ class LoginPresenter: LoginPresentationLogic {
     }
     
     func presentSwtVerification(_ response: Login.swtVerification.Response) {
-//        let message = Login.swtVerification.ViewModel(message: response.message)
         viewController?.displaySwtVerification(message: response.message)
     }
     
     func presentSwtVerificationError(_ error: String) {
-//        let message = Login.swtVerification.ViewModel(message: error)
         viewController?.displaySwtVerification(message: error)
     }
     

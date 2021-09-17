@@ -14,7 +14,7 @@ import UIKit
 import LocalAuthentication
 
 enum Login {
-    // MARK: Use cases
+    // MARK: Use Cases (structs)
     
     enum doLogin {
         struct Request {

@@ -13,6 +13,7 @@
 import UIKit
 import SVProgressHUD
 
+    //MARK:- ViewController protocol - used in presenter
 protocol StatementDisplayLogic: AnyObject {
     func displayDoLogout(viewModel: Statement.doLogout.ViewModel)
     func displayUserData(loadUser: Statement.loadUser.ViewModel)
@@ -22,11 +23,11 @@ protocol StatementDisplayLogic: AnyObject {
 
 class StatementViewController: UIViewController {
     
+    //MARK:- Variables to for interactor and router
     var interactor: StatementBusinessLogic?
     var router: (NSObjectProtocol & StatementRoutingLogic & StatementDataPassing)?
     
-    // MARK: Object lifecycle
-    
+    // MARK: INIT ViewController
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         setup()
@@ -38,7 +39,6 @@ class StatementViewController: UIViewController {
     }
     
     // MARK: Setup
-    
     private func setup() {
         let viewController = self
         let interactor = StatementInteractor()
@@ -52,8 +52,7 @@ class StatementViewController: UIViewController {
         router.dataStore = interactor
     }
     
-    // MARK: Routing
-    
+    // MARK:- Prepare for segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let scene = segue.identifier {
             let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
@@ -62,9 +61,8 @@ class StatementViewController: UIViewController {
             }
         }
     }
-    
-    // MARK: View lifecycle
-    
+        
+    // MARK:- View LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         loadGradient()
@@ -79,7 +77,7 @@ class StatementViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
     }
     
-    // MARK: IBOutlets
+    // MARK: IBOutlets and Variables
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblCpfCnpj: UILabel!
     @IBOutlet weak var lblBalance: UILabel!
@@ -88,8 +86,7 @@ class StatementViewController: UIViewController {
     
     var statementRequest: [StatementData] = []
         
-    // MARK: Do something
-    
+    // MARK: IBActions and ViewController functions
     @IBAction func btnLogout(_ sender: Any) {
         showAlertLogout()
     }
@@ -108,8 +105,7 @@ class StatementViewController: UIViewController {
     
 }
 
-// MARK: - DISPLAY LOGIC
-
+    // MARK: - DISPLAY LOGIC
 extension StatementViewController: StatementDisplayLogic{
     
     func displayDoLogout(viewModel: Statement.doLogout.ViewModel) {
@@ -119,8 +115,8 @@ extension StatementViewController: StatementDisplayLogic{
     func displayUserData(loadUser: Statement.loadUser.ViewModel) {
         DispatchQueue.main.async { [self] in
             lblName.text = "Olá, \(loadUser.user.name)"
-            lblCpfCnpj.text = loadUser.user.cpf
-            lblBalance.text = loadUser.user.balance
+            lblCpfCnpj.text = loadUser.user.formatCpf
+            lblBalance.text = loadUser.user.formatBalance
         }
     }
     
@@ -138,7 +134,7 @@ extension StatementViewController: StatementDisplayLogic{
     }
 }
 
-//MARK:- Table view populating
+    //MARK:- Table view populating
 extension StatementViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

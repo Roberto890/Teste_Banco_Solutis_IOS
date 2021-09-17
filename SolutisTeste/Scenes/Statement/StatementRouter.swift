@@ -12,21 +12,22 @@
 
 import UIKit
 
+    //MARK:- Protocol to do segue
 @objc protocol StatementRoutingLogic {
     func routeToLogin(segue: UIStoryboardSegue?)
 }
-
+    //MARK:- Stored data (interactor take this data and we can get)
 protocol StatementDataPassing {
     var dataStore: StatementDataStore? { get }
 }
 
+    // MARK:- Route
 class StatementRouter: NSObject, StatementRoutingLogic, StatementDataPassing {
 
     weak var viewController: StatementViewController?
     var dataStore: StatementDataStore?
     
-    // MARK: Routing
-    
+    // MARK:- Do the segue
     func routeToLogin(segue: UIStoryboardSegue?) {
         if let segue = segue {
             let destinationVC = segue.destination as! LoginViewController
@@ -41,16 +42,12 @@ class StatementRouter: NSObject, StatementRoutingLogic, StatementDataPassing {
         }
     }
     
-    // MARK: Navigation
-    
+    // MARK:- Do the navigation to next view controller
     func navigateToLogin(source: StatementViewController, destination: LoginViewController) {
         source.show(destination, sender: nil)
     }
     
-    // MARK: Passing data
-    
+    // MARK:- Passing data to view controller
     func passDataToLogin(source: StatementDataStore, destination: inout LoginDataStore) {
-        print("statement")
-//        destination.name = source.name
     }
 }

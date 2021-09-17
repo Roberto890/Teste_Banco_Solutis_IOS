@@ -14,6 +14,7 @@ import UIKit
 import SVProgressHUD
 import LocalAuthentication
 
+    //MARK:- ViewController protocol - used in presenter
 protocol LoginDisplayLogic: AnyObject {
     func displayUserData(viewModel: Login.doLogin.ViewModel)
     func displayError(error: String)
@@ -26,11 +27,11 @@ protocol LoginDisplayLogic: AnyObject {
 
 class LoginViewController: UIViewController {
     
+    //MARK:- Variables to for interactor and router
     var interactor: LoginBusinessLogic?
     var router: (NSObjectProtocol & LoginRoutingLogic & LoginDataPassing)?
     
-    // MARK: Object lifecycle
-    
+    // MARK: INIT ViewController
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         setup()
@@ -42,7 +43,6 @@ class LoginViewController: UIViewController {
     }
     
     // MARK: Setup
-    
     private func setup() {
         let viewController = self
         let interactor = LoginInteractor()
@@ -56,8 +56,7 @@ class LoginViewController: UIViewController {
         router.dataStore = interactor
     }
     
-    // MARK: Routing
-    
+    // MARK:- Prepare for segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let scene = segue.identifier {
             print(scene + segue.identifier!)
@@ -68,8 +67,7 @@ class LoginViewController: UIViewController {
         }
     }
     
-    // MARK: View lifecycle
-    
+    // MARK:- View LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -81,7 +79,7 @@ class LoginViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
     }
     
-    // MARK: IBOutlets
+    // MARK: IBOutlets and Variables
     @IBOutlet weak var swtBiometric: UISwitch!
     @IBOutlet weak var swtEmail: UISwitch!
     @IBOutlet weak var txtPassword: UITextField!
@@ -89,8 +87,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var txtError: UILabel!
     @IBOutlet weak var btnLogin: UIButton!
     
-    // MARK: Try Login
-    
+    // MARK: IBActions and ViewController functions
     @IBAction func btnLogin(_ sender: Any) {
         self.btnLogin.isEnabled = false
         guard let login = txtUsername.text else{return}
@@ -98,13 +95,6 @@ class LoginViewController: UIViewController {
         let userLogin = UserLogin(login: login, password: password)
         doLogin(user: userLogin, swtLogin: swtEmail, swtBiometric: swtBiometric)
     }
-    
-    func doLogin(user: UserLogin, swtLogin: UISwitch, swtBiometric: UISwitch){
-        let request = Login.doLogin.Request(user: user, switchLogin: swtEmail.isOn, switchBiometric: swtBiometric.isOn)
-        interactor?.doLogin(request: request)
-    }
-    
-    // MARK: IBActions
     
     @IBAction func swtEmailChanged(_ sender: Any) {
         let request = Login.swtVerification.Request(type: "Email", switchLogin: swtEmail.isOn, switchBiometric: swtBiometric.isOn)
@@ -123,12 +113,11 @@ class LoginViewController: UIViewController {
     @IBAction func dismissKeyboardMiddle(_ sender: Any) {
         self.view.endEditing(true)
     }
-//
-//    func showAlert(_ message: String){
-//        let alert = UIAlertController(title: "Aviso", message: message, preferredStyle: .alert)
-//        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-//        self.present(alert, animated: true, completion: nil)
-//    }
+    
+    func doLogin(user: UserLogin, swtLogin: UISwitch, swtBiometric: UISwitch){
+        let request = Login.doLogin.Request(user: user, switchLogin: swtEmail.isOn, switchBiometric: swtBiometric.isOn)
+        interactor?.doLogin(request: request)
+    }
     
 }
 
@@ -141,7 +130,7 @@ extension LoginViewController: UITextFieldDelegate{
     }
 }
 
-//MARK : LoginDisplayLogic
+    //MARK:- LoginDisplayLogic - Presenter Return
 extension LoginViewController: LoginDisplayLogic{
    
     func displayUserData(viewModel: Login.doLogin.ViewModel) {

@@ -5,6 +5,8 @@
 //  Created by Virtual Machine on 01/09/21.
 //
 
+//MARK:- MODELS FOR API
+
 import Foundation
 
 struct UserAPI: Decodable{

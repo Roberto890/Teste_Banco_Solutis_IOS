@@ -12,36 +12,33 @@
 
 import UIKit
 
+    //MARK:- Interactor Protocol - called in viewController
 protocol StatementBusinessLogic {
     func doLogout(request: Statement.doLogout.Request)
     func loadUserData(request: Statement.loadUser.Request)
     func loadStatement(request: Statement.loadStatement.Request)
 }
-
+    
+    //MARK:- Save data to pass in router
 protocol StatementDataStore {
     var userData: UserData? {get set}
 }
 
 class StatementInteractor: StatementBusinessLogic, StatementDataStore {
    
+    //MARK:- Interactor variables
     var presenter: StatementPresentationLogic?
     var worker: StatementWorker?
     var userData: UserData?
     
-    // MARK: Do something
-    
+    //MARK:- Interactor functions (call worker/pass to presenter)
     func doLogout(request: Statement.doLogout.Request) {        
         let response = Statement.doLogout.Response()
         presenter?.presentSomething(response: response)
-        
     }
     
     func loadUserData(request: Statement.loadUser.Request) {
-        
-        worker = StatementWorker()
-        let userFormated = worker?.formatUserData(user: userData!)
-        
-        let user = Statement.loadUser.Response(user: userFormated!)
+        let user = Statement.loadUser.Response(user: userData!)
         presenter?.presentUserData(response: user)
     }
     
@@ -57,7 +54,6 @@ class StatementInteractor: StatementBusinessLogic, StatementDataStore {
             case.failure(let error):
                 self.presenter?.presentLoadStatementError(error.localizedDescription)
             }
-            
         }
     }
     

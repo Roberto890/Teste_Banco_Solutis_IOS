@@ -29,6 +29,7 @@ extension LoginWorkerErrors: LocalizedError{
 
 class LoginWorker {
     
+    //MARK:- API Call
     func doLogin(_ user: UserLogin, _ swtEmail: Bool, _ swtBiometric: Bool, completionHandler: @escaping(Result<UserData, Error>) -> Void) {
         
         let utils = Utils()
@@ -66,6 +67,8 @@ class LoginWorker {
         }
     }
     
+    //MARK:- KeyChain Load data and swtVerification
+    
     func keyChainVerification(_ swtLogin: Bool, _ swtBiometric: Bool, completionHandler: @escaping(Result<UserLogin, Error>) -> Void) {
         
         completionHandler(.success(keyChainLoad(swtEmail: swtLogin, swtBiometric: swtBiometric)))
@@ -95,7 +98,7 @@ class LoginWorker {
     
 }
 
-// MARK:- Biometric And FaceID
+    // MARK:- Biometric And FaceID
 extension LoginWorker {
     func biometricVerification(context: LAContext,completionHandler: @escaping (Result<UserLogin, Error>) -> Void){
         var error: NSError? = nil
@@ -120,7 +123,7 @@ extension LoginWorker {
     }
 }
 
-// MARK:- KeyChain Functions
+    // MARK:- KeyChain Functions
 private extension LoginWorker {
     func keyChainSave(username: String?, password: String?){
         let keychain = Keychain(service: "com.roberto.SolutisTeste")

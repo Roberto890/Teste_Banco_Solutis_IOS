@@ -13,7 +13,7 @@
 import UIKit
 
 enum Statement {
-    // MARK: Use cases
+    // MARK: Use Cases (structs)
     
     enum doLogout {
         struct Request {
@@ -31,11 +31,11 @@ enum Statement {
         }
         
         struct Response {
-            let user: UserFormated
+            let user: UserData
         }
         
         struct ViewModel {
-            let user: UserFormated
+            let user: UserData
         }
     }
     

@@ -12,6 +12,7 @@
 
 import UIKit
 
+    //MARK:- Interactor Protocol - called in viewController
 protocol LoginBusinessLogic {
     func doLogin(request: Login.doLogin.Request)
     func keyChainVerification(request: Login.loginView.Request)
@@ -19,17 +20,19 @@ protocol LoginBusinessLogic {
     func biometricVerification(request: Login.biometricVerification.Request)
 }
 
+    //MARK:- Save data to pass in router
 protocol LoginDataStore {
     var userData: UserData? {get}
 }
 
 class LoginInteractor: LoginBusinessLogic, LoginDataStore {
     
+    //MARK:- Interactor variables
     var presenter: LoginPresentationLogic?
     var worker: LoginWorker?
     var userData: UserData?
-    // MARK:- Do something
     
+    //MARK:- Interactor functions (call worker/pass to presenter)
     func doLogin(request: Login.doLogin.Request) {
         worker = LoginWorker()
         worker?.doLogin(request.user, request.switchLogin, request.switchBiometric){ result in
@@ -67,7 +70,6 @@ class LoginInteractor: LoginBusinessLogic, LoginDataStore {
                 case .failure(let error):
                     self.presenter?.presentSwtVerification(.init(message: error.localizedDescription))
             }
-            
         }
     }
     
@@ -81,8 +83,6 @@ class LoginInteractor: LoginBusinessLogic, LoginDataStore {
                     self.presenter?.presentBiometricError(.init(error.localizedDescription))
                     
             }
-            
         }
     }
-    
 }

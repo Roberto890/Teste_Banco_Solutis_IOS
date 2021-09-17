@@ -5,6 +5,8 @@
 //  Created by Virtual Machine on 02/09/21.
 //
 
+//MARK:- MODELS FOR DATA
+
 import Foundation
 
 struct UserLogin {
@@ -17,18 +19,28 @@ struct UserData {
     var cpf: String
     var balance: Double
     var token: String
-}
-
-struct UserFormated{
-    var name: String
-    var cpf: String
-    var balance: String
-    var token: String
+    
+    var formatCpf: String {
+        return Utils().cpfCnpjMask(cpfCnpj: self.cpf)
+    }
+    
+    var formatBalance: String{
+        return Utils().moneyFormatter(value: self.balance)
+    }
 }
 
 struct StatementData {
     var date: String
     var description: String
     var value: Double
+    
+    var formatedData: String {
+        return Utils().dateFormatter(date: date)
+    }
+    
+    var formatedValue: String {
+        return Utils().moneyFormatter(value: value)
+    }
+    
 }
 
