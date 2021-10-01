@@ -27,6 +27,10 @@ struct UserData {
     var formatBalance: String{
         return Utils().moneyFormatter(value: self.balance)
     }
+    
+    var formatName: String {
+        return "Olá, \(self.name)"
+    }
 }
 
 struct StatementData {

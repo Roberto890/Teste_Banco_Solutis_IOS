@@ -114,7 +114,7 @@ extension StatementViewController: StatementDisplayLogic{
     
     func displayUserData(loadUser: Statement.loadUser.ViewModel) {
         DispatchQueue.main.async { [self] in
-            lblName.text = "Olá, \(loadUser.user.name)"
+            lblName.text = loadUser.user.formatName
             lblCpfCnpj.text = loadUser.user.formatCpf
             lblBalance.text = loadUser.user.formatBalance
         }

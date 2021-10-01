@@ -44,7 +44,7 @@ class StatementRouter: NSObject, StatementRoutingLogic, StatementDataPassing {
     
     // MARK:- Do the navigation to next view controller
     func navigateToLogin(source: StatementViewController, destination: LoginViewController) {
-        source.show(destination, sender: nil)
+        source.navigationController?.popToViewController(destination, animated: true)
     }
     
     // MARK:- Passing data to view controller
