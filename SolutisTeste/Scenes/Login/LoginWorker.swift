@@ -23,30 +23,48 @@ enum LoginWorkerErrors: String, Error {
     case biometricUnavailable = "Desculpe está feature esta indisponível para este aparelho, Porfavor habilite nas configurações"
 }
 
+protocol LoginWorkerProtocol {
+    func doLogin(_ user: UserLogin, _ swtEmail: Bool, _ swtBiometric: Bool, completionHandler: @escaping(Result<UserData, Error>) -> Void)
+    func keyChainVerification(_ swtLogin: Bool, _ swtBiometric: Bool, completionHandler: @escaping(Result<UserLogin, Error>) -> Void)
+    func swtVerifications(type: String, swtEmail: Bool, swtBiometric: Bool, completionHandler: @escaping (Result<String, Error>) -> Void)
+    func biometricVerification(context: LAContext,completionHandler: @escaping (Result<UserLogin, Error>) -> Void)
+    func keyChainLoad(swtEmail: Bool, swtBiometric: Bool) -> UserLogin
+    func keyChainSave(username: String?, password: String?)
+}
+
 extension LoginWorkerErrors: LocalizedError{
     var errorDescription: String? {return NSLocalizedString(rawValue, comment: "")}
 }
 
-class LoginWorker {
+class LoginWorker: LoginWorkerProtocol {
+    
+    let apiRequester: APIRequestProtocol
+    let utils: UtilsProtocol
+    
+    init(apiRequester: APIRequestProtocol, utils: UtilsProtocol) {
+        self.apiRequester = apiRequester
+        self.utils = utils
+    }
     
     //MARK:- API Call
     func doLogin(_ user: UserLogin, _ swtEmail: Bool, _ swtBiometric: Bool, completionHandler: @escaping(Result<UserData, Error>) -> Void) {
         
-        let utils = Utils()
         
-        if (!utils.isValidEmail(email: user.login)) {
+        print(user.login)
+        print(user.password)
+        if (utils.isValidEmail(email: user.login) == false) {
             completionHandler(.failure(LoginWorkerErrors.invalidEmail))
             return
         }
         
-        if (!utils.isValidPassword(password: user.password)) {
+        if (utils.isValidPassword(password: user.password) == false) {
             completionHandler(.failure(LoginWorkerErrors.invalidPassword))
             return
         }
         
         SVProgressHUD.show()
         
-        APIRequest().doLogin(user.login, user.password) { result in
+        apiRequester.doLogin(user.login, user.password) { result in
             switch result {
             case .success(_):
                 if swtEmail == true && swtBiometric == true {
@@ -124,7 +142,7 @@ extension LoginWorker {
 }
 
     // MARK:- KeyChain Functions
-private extension LoginWorker {
+extension LoginWorker {
     func keyChainSave(username: String?, password: String?){
         let keychain = Keychain(service: "com.roberto.SolutisTeste")
         keychain["username"] = username

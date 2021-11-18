@@ -7,13 +7,18 @@
 
 import Foundation
 
+protocol APIRequestProtocol {
+    func doLogin(_ loginUser: String, _ passwordUser: String, completionHandler: @escaping (Result<UserData, Error>) -> Void)
+    func loadStatement(_ token: String, completionHandler: @escaping(Result<[StatementData], Error>) -> Void)
+}
+
 enum APIErros: String, Error {
     case invalidData = "Credenciais inválidas"
     case invalidAPICall = "Houve erro ao tentar fazer o uso da api"
     case parseError = "Erro ao tentar fazer o parse (JSONDECODER)"
 }
 
-struct APIRequest {
+struct APIRequest: APIRequestProtocol {
 
     func doLogin(_ loginUser: String, _ passwordUser: String, completionHandler: @escaping (Result<UserData, Error>) -> Void) {
         do {

@@ -15,7 +15,7 @@ import SVProgressHUD
 import LocalAuthentication
 
     //MARK:- ViewController protocol - used in presenter
-protocol LoginDisplayLogic: AnyObject {
+protocol LoginViewControllerProtocol: AnyObject {
     func displayUserData(viewModel: Login.doLogin.ViewModel)
     func displayError(error: String)
     func displayKeyChainData(userLogin: Login.loginView.ViewModel)
@@ -25,52 +25,16 @@ protocol LoginDisplayLogic: AnyObject {
     func displayBiometricError(error: String)
 }
 
+//protocol LoginRouterDelegate {
+//    func setup()
+//}
+
 class LoginViewController: UIViewController {
     
     //MARK:- Variables to for interactor and router
-    var interactor: LoginBusinessLogic?
-    var router: (NSObjectProtocol & LoginRoutingLogic & LoginDataPassing)?
-    
-    // MARK: INIT ViewController
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        setup()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setup()
-    }
-    
-    // MARK: Setup
-    private func setup() {
-        let viewController = self
-        let interactor = LoginInteractor()
-        let presenter = LoginPresenter()
-        let router = LoginRouter()
-        viewController.interactor = interactor
-        viewController.router = router
-        interactor.presenter = presenter
-        presenter.viewController = viewController
-        router.viewController = viewController
-        router.dataStore = interactor
-    }
-    
-    // MARK:- Prepare for segue
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let scene = segue.identifier {
-            print(scene + segue.identifier!)
-            let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-            if let router = router, router.responds(to: selector) {
-                router.perform(selector, with: segue)
-            }
-        }
-    }
-    
-    // MARK:- View LifeCycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+    var interactor: LoginInteractorProtocol?
+    var loginRouter: (NSObjectProtocol & LoginRouterProtocol & LoginDataPassingProtocol)?
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -98,12 +62,12 @@ class LoginViewController: UIViewController {
     
     @IBAction func swtEmailChanged(_ sender: Any) {
         let request = Login.swtVerification.Request(type: "Email", switchLogin: swtEmail.isOn, switchBiometric: swtBiometric.isOn)
-        interactor?.swtVerifications(request: request)
+        interactor!.swtVerifications(request: request)
     }
     
     @IBAction func swtBiometricChanged(_ sender: Any) {
         let request = Login.swtVerification.Request(type: "Biometric", switchLogin: swtEmail.isOn, switchBiometric: swtBiometric.isOn)
-        interactor?.swtVerifications(request: request)
+        interactor!.swtVerifications(request: request)
     }
     
     @IBAction func dismissKeyboardTop(_ sender: Any) {
@@ -116,7 +80,7 @@ class LoginViewController: UIViewController {
     
     func doLogin(user: UserLogin, swtLogin: UISwitch, swtBiometric: UISwitch){
         let request = Login.doLogin.Request(user: user, switchLogin: swtEmail.isOn, switchBiometric: swtBiometric.isOn)
-        interactor?.doLogin(request: request)
+        interactor!.doLogin(request: request)
     }
     
 }
@@ -131,11 +95,11 @@ extension LoginViewController: UITextFieldDelegate{
 }
 
     //MARK:- LoginDisplayLogic - Presenter Return
-extension LoginViewController: LoginDisplayLogic{
+extension LoginViewController: LoginViewControllerProtocol{
    
     func displayUserData(viewModel: Login.doLogin.ViewModel) {
         DispatchQueue.main.async {
-            self.router?.routeToStatement(segue: nil)
+            self.loginRouter?.routeToStatement(segue: nil)
             SVProgressHUD.dismiss()
             self.btnLogin.isEnabled = true
         }
@@ -162,7 +126,7 @@ extension LoginViewController: LoginDisplayLogic{
             if self.txtPassword.text != "" {
                 let request = Login.biometricVerification.Request(context: context)
                 self.swtBiometric.isOn = true
-                self.interactor?.biometricVerification(request: request)
+                self.interactor!.biometricVerification(request: request)
             }else {
                 self.swtBiometric.isOn = false
             }

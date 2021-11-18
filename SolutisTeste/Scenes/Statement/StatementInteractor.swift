@@ -13,46 +13,52 @@
 import UIKit
 
     //MARK:- Interactor Protocol - called in viewController
-protocol StatementBusinessLogic {
+protocol StatementInteractorProtocol {
     func doLogout(request: Statement.doLogout.Request)
     func loadUserData(request: Statement.loadUser.Request)
     func loadStatement(request: Statement.loadStatement.Request)
 }
     
     //MARK:- Save data to pass in router
-protocol StatementDataStore {
+protocol StatementDataStoreProtocol {
     var userData: UserData? {get set}
 }
 
-class StatementInteractor: StatementBusinessLogic, StatementDataStore {
+class StatementInteractor: StatementInteractorProtocol, StatementDataStoreProtocol {
    
-    //MARK:- Interactor variables
-    var presenter: StatementPresentationLogic?
-    var worker: StatementWorker?
+    //MARK:- Interactor variables worker, presenter
+    let presenter: StatementPresenterProtocol
+    let worker: StatementWorkerProtocol
+    
+    //MARK:- DataPassing
     var userData: UserData?
     
-    //MARK:- Interactor functions (call worker/pass to presenter)
+    init(worker: StatementWorkerProtocol, presenter: StatementPresenterProtocol) {
+        self.worker = worker
+        self.presenter = presenter
+    }
+    
+    //MARK:- Functions
     func doLogout(request: Statement.doLogout.Request) {        
         let response = Statement.doLogout.Response()
-        presenter?.presentSomething(response: response)
+        presenter.presentSomething(response: response)
     }
     
     func loadUserData(request: Statement.loadUser.Request) {
         let user = Statement.loadUser.Response(user: userData!)
-        presenter?.presentUserData(response: user)
+        presenter.presentUserData(response: user)
     }
     
     func loadStatement(request: Statement.loadStatement.Request) {
-        worker = StatementWorker()
         let token = userData?.token
-        worker?.loadStatement(token: token!){ result in
+        worker.loadStatement(token: token!){ result in
             switch result {
             case.success(let result):
                 let statementData = Statement.loadStatement.Response(statement: result)
-                self.presenter?.presentLoadStatement(response: statementData)
+                self.presenter.presentLoadStatement(response: statementData)
                 break
             case.failure(let error):
-                self.presenter?.presentLoadStatementError(error.localizedDescription)
+                self.presenter.presentLoadStatementError(error.localizedDescription)
             }
         }
     }

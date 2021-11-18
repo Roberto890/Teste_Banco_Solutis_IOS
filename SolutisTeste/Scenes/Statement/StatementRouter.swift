@@ -13,41 +13,58 @@
 import UIKit
 
     //MARK:- Protocol to do segue
-@objc protocol StatementRoutingLogic {
+protocol StatementRouterProtocol {
     func routeToLogin(segue: UIStoryboardSegue?)
+//    func start()
+    func setup() -> StatementViewController
 }
     //MARK:- Stored data (interactor take this data and we can get)
-protocol StatementDataPassing {
-    var dataStore: StatementDataStore? { get }
+protocol StatementDataPassingProtocol {
+    var dataStore: StatementDataStoreProtocol? { get }
 }
 
     // MARK:- Route
-class StatementRouter: NSObject, StatementRoutingLogic, StatementDataPassing {
-
+class StatementRouter: NSObject, StatementRouterProtocol, StatementDataPassingProtocol {
+    
+    var dataStore: StatementDataStoreProtocol?
     weak var viewController: StatementViewController?
-    var dataStore: StatementDataStore?
+    
+    private let navigation: UINavigationController
+    
+    init(navigation: UINavigationController) {
+        self.navigation = navigation
+    }
+    
+    //MARK: - SETUP
+    func setup() -> StatementViewController {
+        let requesterHTTP = APIRequest()
+        let utils = Utils()
+        let worker = StatementWorker(apiRequester: requesterHTTP, utils: utils)
+        let presenter = StatementPresenter()
+        let interactor = StatementInteractor(worker: worker, presenter: presenter)
+        let viewController = navigation.storyboard?.instantiateViewController(withIdentifier: "StatementViewController") as! StatementViewController
+        viewController.interactor = interactor
+        viewController.statementRouter = self
+        presenter.viewController = viewController
+        self.viewController = viewController
+        self.dataStore = interactor
+        return viewController
+    }
     
     // MARK:- Do the segue
     func routeToLogin(segue: UIStoryboardSegue?) {
-        if let segue = segue {
-            let destinationVC = segue.destination as! LoginViewController
-            var destinationDS = destinationVC.router!.dataStore!
-            passDataToLogin(source: dataStore!, destination: &destinationDS)
-        } else {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let destinationVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-            var destinationDS = destinationVC.router!.dataStore!
-            passDataToLogin(source: dataStore!, destination: &destinationDS)
-            navigateToLogin(source: viewController!, destination: destinationVC)
-        }
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let destinationVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        navigateToLogin(source: viewController!, destination: destinationVC)
     }
     
     // MARK:- Do the navigation to next view controller
     func navigateToLogin(source: StatementViewController, destination: LoginViewController) {
-        source.show(destination, sender: nil)
+        source.navigationController?.popViewController(animated: true)
     }
     
     // MARK:- Passing data to view controller
-    func passDataToLogin(source: StatementDataStore, destination: inout LoginDataStore) {
+    func passDataToLogin(source: StatementDataStoreProtocol, destination: inout LoginDataStoreProtocol) {
     }
+    
 }

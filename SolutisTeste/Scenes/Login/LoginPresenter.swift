@@ -13,7 +13,7 @@
 import UIKit
 
     //MARK:- Presenter Protocols - called in interactor
-protocol LoginPresentationLogic {
+protocol LoginPresenterProtocol {
     func presentUserData(_ response: Login.doLogin.Response)
     func presentLoginError(_ error: String )
     func presentKeyChainData(_ response: Login.loginView.Response)
@@ -23,10 +23,12 @@ protocol LoginPresentationLogic {
     func presentBiometricError(_ error: String)
 }
 
-class LoginPresenter: LoginPresentationLogic {
+class LoginPresenter: LoginPresenterProtocol {
+    
+    init() { }
     
     //MARK:- Interactor Variables
-    var viewController: LoginDisplayLogic?
+    weak var viewController: LoginViewControllerProtocol?
     
     // MARK:- Interactor functions(reicive interactor/ pass to viewController)
     func presentUserData(_ response: Login.doLogin.Response) {

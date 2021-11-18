@@ -14,7 +14,7 @@ import UIKit
 import SVProgressHUD
 
     //MARK:- ViewController protocol - used in presenter
-protocol StatementDisplayLogic: AnyObject {
+protocol StatementViewControllerProtocol: AnyObject {
     func displayDoLogout(viewModel: Statement.doLogout.ViewModel)
     func displayUserData(loadUser: Statement.loadUser.ViewModel)
     func displayLoadStatement(statementData: Statement.loadStatement.ViewModel)
@@ -24,43 +24,8 @@ protocol StatementDisplayLogic: AnyObject {
 class StatementViewController: UIViewController {
     
     //MARK:- Variables to for interactor and router
-    var interactor: StatementBusinessLogic?
-    var router: (NSObjectProtocol & StatementRoutingLogic & StatementDataPassing)?
-    
-    // MARK: INIT ViewController
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        setup()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setup()
-    }
-    
-    // MARK: Setup
-    private func setup() {
-        let viewController = self
-        let interactor = StatementInteractor()
-        let presenter = StatementPresenter()
-        let router = StatementRouter()
-        viewController.interactor = interactor
-        viewController.router = router
-        interactor.presenter = presenter
-        presenter.viewController = viewController
-        router.viewController = viewController
-        router.dataStore = interactor
-    }
-    
-    // MARK:- Prepare for segue
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let scene = segue.identifier {
-            let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-            if let router = router, router.responds(to: selector) {
-                router.perform(selector, with: segue)
-            }
-        }
-    }
+    var interactor: StatementInteractorProtocol?
+    var statementRouter: (NSObjectProtocol & StatementRouterProtocol & StatementDataPassingProtocol)?
         
     // MARK:- View LifeCycle
     override func viewDidLoad() {
@@ -98,15 +63,17 @@ class StatementViewController: UIViewController {
     func showAlertLogout(){
         let alert = UIAlertController(title: "Logout", message: "Realmente deseja deslogar?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Cancelar", style: .default, handler: nil))
-        alert.addAction(UIAlertAction(title: "Sair", style: .destructive, handler: {_ in
-                                        self.navigationController?.popViewController(animated: true)}))
+        alert.addAction(UIAlertAction(title: "Sair", style: .destructive, handler: { [self]_ in
+            statementRouter?.routeToLogin(segue: nil)
+            
+        }))
         self.present(alert, animated: true, completion: nil)
     }
     
 }
 
     // MARK: - DISPLAY LOGIC
-extension StatementViewController: StatementDisplayLogic{
+extension StatementViewController: StatementViewControllerProtocol {
     
     func displayDoLogout(viewModel: Statement.doLogout.ViewModel) {
         
@@ -114,7 +81,7 @@ extension StatementViewController: StatementDisplayLogic{
     
     func displayUserData(loadUser: Statement.loadUser.ViewModel) {
         DispatchQueue.main.async { [self] in
-            lblName.text = "Olá, \(loadUser.user.name)"
+            lblName.text = loadUser.user.formatName
             lblCpfCnpj.text = loadUser.user.formatCpf
             lblBalance.text = loadUser.user.formatBalance
         }
@@ -129,8 +96,11 @@ extension StatementViewController: StatementDisplayLogic{
     }
     
     func displayLoadStatementError(error: String) {
-        SVProgressHUD.dismiss()
-        Utils().showAlert(error, ui: self)
+        DispatchQueue.main.async { [self] in
+            SVProgressHUD.dismiss()
+            Utils().showAlert(error, ui: self)
+        }
+        
     }
 }
 

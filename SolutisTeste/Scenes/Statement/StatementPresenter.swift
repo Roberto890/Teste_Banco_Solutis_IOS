@@ -13,17 +13,17 @@
 import UIKit
 
     //MARK:- Presenter Protocols - called in interactor
-protocol StatementPresentationLogic {
+protocol StatementPresenterProtocol {
     func presentSomething(response: Statement.doLogout.Response)
     func presentUserData(response: Statement.loadUser.Response)
     func presentLoadStatement(response: Statement.loadStatement.Response)
     func presentLoadStatementError(_ error: String)
 }
 
-class StatementPresenter: StatementPresentationLogic {
+class StatementPresenter: StatementPresenterProtocol {
    
     //MARK:- Interactor Variables
-    weak var viewController: StatementDisplayLogic?
+    weak var viewController: StatementViewControllerProtocol?
     
     // MARK:- Interactor functions(reicive interactor/ pass to viewController)
     func presentSomething(response: Statement.doLogout.Response) {

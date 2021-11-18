@@ -10,22 +10,34 @@ import JMMaskTextField_Swift
 import CPF_CNPJ_Validator
 import UIKit
 
+protocol UtilsProtocol {
+    func isValidCpfCnpj(_ cpfCnpj: String) -> Bool
+    func isValidEmail(email: String) -> Bool
+    func isValidPassword(password: String) -> Bool
+    func setGradientBackground(_ view: UIView)
+    func formatCellValues(statement: StatementData, cell: CardCellViewController) -> CardCellViewController
+    func moneyFormatter(value: Double) -> String
+    func dateFormatter(date: String) -> String
+    func cpfCnpjMask(cpfCnpj: String) -> String
+    func showAlert(_ message: String, ui: UIViewController)
+}
+
     // MARK:- Validations and cell formatter
-class Utils{
+class Utils: UtilsProtocol {
     
-    func isValidCpfCnpj(_ cpfCnpj: String) -> Bool{
+    func isValidCpfCnpj(_ cpfCnpj: String) -> Bool {
         let cpf = BooleanValidator().validate(cpfCnpj, kind: .CPF)
         let cnpj = BooleanValidator().validate(cpfCnpj, kind: .CNPJ)
         return cpf || cnpj
     }
     
-    func isValidEmail(email: String) -> Bool{
+    func isValidEmail(email: String) -> Bool {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let emailPred = NSPredicate(format: "SELF MATCHES %@", emailRegex)
         return emailPred.evaluate(with: email)
     }
     
-    func isValidPassword(password: String) -> Bool{
+    func isValidPassword(password: String) -> Bool {
         if password != "" {
             let passwordRegx = "^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&<>*~:`-]).{6,}$"
             let passwordCheck = NSPredicate(format: "SELF MATCHES %@",passwordRegx)
@@ -49,16 +61,9 @@ class Utils{
     
     func formatCellValues(statement: StatementData, cell: CardCellViewController) -> CardCellViewController {
         
-        cell.cellView.layer.shadowColor = UIColor.black.cgColor
-        cell.cellView.layer.shadowPath = UIBezierPath(rect: cell.cellView.bounds).cgPath
-        cell.cellView.layer.shadowRadius = 5
-        cell.cellView.layer.shadowOffset = CGSize(width: 0, height: 3)
-        cell.cellView.layer.shadowOpacity = 0.5
-        
         cell.lblDate.text = dateFormatter(date: statement.date)
         cell.lblDescription.text = statement.description
-        cell.layer.cornerRadius = 5
-        cell.layer.masksToBounds = true
+        cell.layer.cornerRadius = 10
         
         if statement.value < 0 {
             cell.lblType.text = "Pagamento"
@@ -80,14 +85,14 @@ class Utils{
     // MARK:- Strings, Money, Date Formatter
 extension Utils{
     
-    func moneyFormatter(value: Double) -> String{
+    func moneyFormatter(value: Double) -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
         formatter.locale = Locale(identifier: "pt_BR")
         return formatter.string(for: value)!
     }
     
-    func dateFormatter(date: String) -> String{
+    func dateFormatter(date: String) -> String {
         let dateFormatterGet = DateFormatter()
         dateFormatterGet.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
 
@@ -102,7 +107,7 @@ extension Utils{
         }
     }
 
-    func cpfCnpjMask(cpfCnpj: String) -> String{
+    func cpfCnpjMask(cpfCnpj: String) -> String {
         let mask: JMStringMask
         if (cpfCnpj.count > 11) {
             mask = JMStringMask(mask: "00.000.000/0000-00")
@@ -117,7 +122,7 @@ extension Utils{
 // MARK:- ALERTS CREATOR
 
 extension Utils {
-    func showAlert(_ message: String, ui: UIViewController){
+    func showAlert(_ message: String, ui: UIViewController) {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: "Aviso", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))

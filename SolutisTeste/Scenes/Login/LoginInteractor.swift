@@ -13,7 +13,7 @@
 import UIKit
 
     //MARK:- Interactor Protocol - called in viewController
-protocol LoginBusinessLogic {
+protocol LoginInteractorProtocol {
     func doLogin(request: Login.doLogin.Request)
     func keyChainVerification(request: Login.loginView.Request)
     func swtVerifications(request: Login.swtVerification.Request)
@@ -21,39 +21,45 @@ protocol LoginBusinessLogic {
 }
 
     //MARK:- Save data to pass in router
-protocol LoginDataStore {
+protocol LoginDataStoreProtocol {
     var userData: UserData? {get}
 }
 
-class LoginInteractor: LoginBusinessLogic, LoginDataStore {
+class LoginInteractor: LoginInteractorProtocol, LoginDataStoreProtocol {
     
-    //MARK:- Interactor variables
-    var presenter: LoginPresentationLogic?
-    var worker: LoginWorker?
+    //MARK:- Interactor variables worker, presenter
+    let presenter: LoginPresenterProtocol
+    let worker: LoginWorkerProtocol
+    
+    //MARK:- DataPassing
     var userData: UserData?
+    
+    init(worker: LoginWorkerProtocol, presenter: LoginPresenterProtocol) {
+        self.worker = worker
+        self.presenter = presenter
+    }
     
     //MARK:- Interactor functions (call worker/pass to presenter)
     func doLogin(request: Login.doLogin.Request) {
-        worker = LoginWorker()
-        worker?.doLogin(request.user, request.switchLogin, request.switchBiometric){ result in
+        worker.doLogin(request.user, request.switchLogin, request.switchBiometric){ result in
             switch result {
             case.success(let userResult):
                 self.userData = userResult
-                self.presenter?.presentUserData(.init(user: self.userData!))
+                self.presenter.presentUserData(.init(user: self.userData!))
                 return
             case.failure(let error):
-                self.presenter?.presentLoginError(.init(error.localizedDescription))
+                self.presenter.presentLoginError(.init(error.localizedDescription))
                 return
             }
         }
     }
     
     func keyChainVerification(request: Login.loginView.Request) {
-        worker = LoginWorker()
-        worker?.keyChainVerification(request.switchLogin, request.switchBiometric){ result in
+//        worker = LoginWorker()
+        worker.keyChainVerification(request.switchLogin, request.switchBiometric){ result in
             switch result{
                 case.success(let user):
-                    self.presenter?.presentKeyChainData(.init(user: user))
+                self.presenter.presentKeyChainData(.init(user: user))
                     return
                 case.failure(_):
                     return
@@ -62,25 +68,25 @@ class LoginInteractor: LoginBusinessLogic, LoginDataStore {
     }
     
     func swtVerifications(request: Login.swtVerification.Request) {
-        worker = LoginWorker()
-        worker?.swtVerifications(type: request.type, swtEmail: request.switchLogin, swtBiometric: request.switchBiometric){result in
+//        worker = LoginWorker()
+        worker.swtVerifications(type: request.type, swtEmail: request.switchLogin, swtBiometric: request.switchBiometric){result in
             switch result{
                 case.success(let result):
-                    self.presenter?.presentSwtVerification(.init(message: result))
+                self.presenter.presentSwtVerification(.init(message: result))
                 case .failure(let error):
-                    self.presenter?.presentSwtVerification(.init(message: error.localizedDescription))
+                self.presenter.presentSwtVerification(.init(message: error.localizedDescription))
             }
         }
     }
     
     func biometricVerification(request: Login.biometricVerification.Request) {
-        worker = LoginWorker()
-        worker?.biometricVerification(context: request.context){result in
+//        worker = LoginWorker()
+        worker.biometricVerification(context: request.context){result in
             switch result{
                 case.success(let userLogin):
-                    self.presenter?.presentBiometricVerification(.init(login: userLogin.login, password: userLogin.password))
+                self.presenter.presentBiometricVerification(.init(login: userLogin.login, password: userLogin.password))
                 case.failure(let error):
-                    self.presenter?.presentBiometricError(.init(error.localizedDescription))
+                self.presenter.presentBiometricError(.init(error.localizedDescription))
                     
             }
         }

@@ -13,7 +13,21 @@
 import UIKit
 import SVProgressHUD
 
-class StatementWorker {
+// criar um protocolo para que meu interactor utilize o protocolo para poder chamar meu worker
+
+protocol StatementWorkerProtocol {
+    func loadStatement(token: String, completionHandler: @escaping(Result<[StatementData], Error>) -> Void)
+}
+
+class StatementWorker: StatementWorkerProtocol {
+    
+    let apiRequester: APIRequestProtocol
+    let utils: UtilsProtocol
+    
+    init(apiRequester: APIRequestProtocol, utils: UtilsProtocol) {
+        self.apiRequester = apiRequester
+        self.utils = utils
+    }
     
     //MARK:- API Call
     func loadStatement(token: String, completionHandler: @escaping(Result<[StatementData], Error>) -> Void) {

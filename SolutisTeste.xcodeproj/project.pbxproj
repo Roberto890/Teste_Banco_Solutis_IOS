@@ -13,7 +13,6 @@
 		BAB5D6C026E0130C00423531 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5D6BF26E0130C00423531 /* APIRequest.swift */; };
 		BAB5D6C426E019EB00423531 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5D6C326E019EB00423531 /* UserModel.swift */; };
 		BAB5D6C626E1025400423531 /* CardCellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5D6C526E1025400423531 /* CardCellViewController.swift */; };
-		BAB5D6C826E104C900423531 /* oldStatementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5D6C726E104C900423531 /* oldStatementViewController.swift */; };
 		BAB5D6CA26E12D0600423531 /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5D6C926E12D0600423531 /* UserDataModel.swift */; };
 		BAB5D6D926E29DE000423531 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5D6D826E29DE000423531 /* Utils.swift */; };
 		BACF36A626F36DE700AB5F03 /* StatementPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACF36A026F36DE700AB5F03 /* StatementPresenter.swift */; };
@@ -28,9 +27,10 @@
 		BACF36B526F36E0300AB5F03 /* LoginModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACF36AF26F36E0300AB5F03 /* LoginModels.swift */; };
 		BACF36B626F36E0300AB5F03 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACF36B026F36E0300AB5F03 /* LoginViewController.swift */; };
 		BACF36B726F36E0300AB5F03 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACF36B126F36E0300AB5F03 /* LoginInteractor.swift */; };
+		BAFBD3F6272C303F000A86B0 /* StatementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFBD3F5272C303F000A86B0 /* StatementView.swift */; };
+		BAFBD3F8272C3056000A86B0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFBD3F7272C3056000A86B0 /* LoginView.swift */; };
 		C4F4766D26D02380000DF719 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F4766C26D02380000DF719 /* AppDelegate.swift */; };
 		C4F4766F26D02380000DF719 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F4766E26D02380000DF719 /* SceneDelegate.swift */; };
-		C4F4767126D02380000DF719 /* oldLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F4767026D02380000DF719 /* oldLoginViewController.swift */; };
 		C4F4767426D02380000DF719 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4F4767226D02380000DF719 /* Main.storyboard */; };
 		C4F4767626D02381000DF719 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4F4767526D02381000DF719 /* Assets.xcassets */; };
 		C4F4767926D02381000DF719 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4F4767726D02381000DF719 /* LaunchScreen.storyboard */; };
@@ -67,7 +67,6 @@
 		BAB5D6BF26E0130C00423531 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		BAB5D6C326E019EB00423531 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		BAB5D6C526E1025400423531 /* CardCellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCellViewController.swift; sourceTree = "<group>"; };
-		BAB5D6C726E104C900423531 /* oldStatementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = oldStatementViewController.swift; sourceTree = "<group>"; };
 		BAB5D6C926E12D0600423531 /* UserDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
 		BAB5D6D826E29DE000423531 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		BACF36A026F36DE700AB5F03 /* StatementPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementPresenter.swift; sourceTree = "<group>"; };
@@ -82,10 +81,11 @@
 		BACF36AF26F36E0300AB5F03 /* LoginModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModels.swift; sourceTree = "<group>"; };
 		BACF36B026F36E0300AB5F03 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BACF36B126F36E0300AB5F03 /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
+		BAFBD3F5272C303F000A86B0 /* StatementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementView.swift; sourceTree = "<group>"; };
+		BAFBD3F7272C3056000A86B0 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		C4F4766926D02380000DF719 /* SolutisTeste.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SolutisTeste.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4F4766C26D02380000DF719 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C4F4766E26D02380000DF719 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C4F4767026D02380000DF719 /* oldLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = oldLoginViewController.swift; sourceTree = "<group>"; };
 		C4F4767326D02380000DF719 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C4F4767526D02381000DF719 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C4F4767826D02381000DF719 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -162,10 +162,8 @@
 		BA00B79B26DDB69F0060FC37 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				BACF369F26F36D9500AB5F03 /* Statement */,
 				BACF369E26F36D8E00AB5F03 /* Login */,
-				C4F4767026D02380000DF719 /* oldLoginViewController.swift */,
-				BAB5D6C726E104C900423531 /* oldStatementViewController.swift */,
+				BACF369F26F36D9500AB5F03 /* Statement */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -204,6 +202,7 @@
 				BACF36AD26F36E0300AB5F03 /* LoginWorker.swift */,
 				BACF36AE26F36E0300AB5F03 /* LoginRouter.swift */,
 				BACF36AF26F36E0300AB5F03 /* LoginModels.swift */,
+				BAFBD3F7272C3056000A86B0 /* LoginView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -218,6 +217,7 @@
 				BACF36A126F36DE700AB5F03 /* StatementWorker.swift */,
 				BACF36A226F36DE700AB5F03 /* StatementRouter.swift */,
 				BACF36A326F36DE700AB5F03 /* StatementModels.swift */,
+				BAFBD3F5272C303F000A86B0 /* StatementView.swift */,
 			);
 			path = Statement;
 			sourceTree = "<group>";
@@ -533,21 +533,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				BACF36B226F36E0300AB5F03 /* LoginPresenter.swift in Sources */,
-				C4F4767126D02380000DF719 /* oldLoginViewController.swift in Sources */,
 				BACF36B726F36E0300AB5F03 /* LoginInteractor.swift in Sources */,
 				BAB5D6C626E1025400423531 /* CardCellViewController.swift in Sources */,
 				BACF36B326F36E0300AB5F03 /* LoginWorker.swift in Sources */,
 				BACF36A826F36DE700AB5F03 /* StatementRouter.swift in Sources */,
 				BACF36A626F36DE700AB5F03 /* StatementPresenter.swift in Sources */,
+				BAFBD3F6272C303F000A86B0 /* StatementView.swift in Sources */,
 				BACF36AA26F36DE700AB5F03 /* StatementViewController.swift in Sources */,
 				BACF36A726F36DE700AB5F03 /* StatementWorker.swift in Sources */,
 				BACF36B626F36E0300AB5F03 /* LoginViewController.swift in Sources */,
 				BAB5D6D926E29DE000423531 /* Utils.swift in Sources */,
 				BAB5D6CA26E12D0600423531 /* UserDataModel.swift in Sources */,
 				BAB5D6C426E019EB00423531 /* UserModel.swift in Sources */,
-				BAB5D6C826E104C900423531 /* oldStatementViewController.swift in Sources */,
 				BACF36A926F36DE700AB5F03 /* StatementModels.swift in Sources */,
 				BACF36B526F36E0300AB5F03 /* LoginModels.swift in Sources */,
+				BAFBD3F8272C3056000A86B0 /* LoginView.swift in Sources */,
 				C4F4766D26D02380000DF719 /* AppDelegate.swift in Sources */,
 				BACF36B426F36E0300AB5F03 /* LoginRouter.swift in Sources */,
 				BAB5D6C026E0130C00423531 /* APIRequest.swift in Sources */,
