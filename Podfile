@@ -10,7 +10,7 @@ target 'SolutisTeste' do
   pod 'SVProgressHUD', '2.2.5'
   pod 'JMMaskTextField-Swift'
   pod 'KeychainAccess'
-  pod 'CPF-CNPJ-Validator'
+  pod 'CPF_CNPJ_Validators'
 
   target 'SolutisTesteTests' do
     inherit! :search_paths

@@ -7,7 +7,7 @@
 
 import Foundation
 import JMMaskTextField_Swift
-import CPF_CNPJ_Validator
+import CPF_CNPJ_Validators
 import UIKit
 
 protocol UtilsProtocol {
@@ -26,8 +26,8 @@ protocol UtilsProtocol {
 class Utils: UtilsProtocol {
     
     func isValidCpfCnpj(_ cpfCnpj: String) -> Bool {
-        let cpf = BooleanValidator().validate(cpfCnpj, kind: .CPF)
-        let cnpj = BooleanValidator().validate(cpfCnpj, kind: .CNPJ)
+        let cpf = CpfCnpjUtils().cpfValidator(cpf: cpfCnpj)
+        let cnpj = CpfCnpjUtils().cnpjValidator(cnpj: cpfCnpj)
         return cpf || cnpj
     }
     
@@ -108,13 +108,14 @@ extension Utils{
     }
 
     func cpfCnpjMask(cpfCnpj: String) -> String {
-        let mask: JMStringMask
+        var result: String = ""
         if (cpfCnpj.count > 11) {
-            mask = JMStringMask(mask: "00.000.000/0000-00")
-        }else {
-            mask = JMStringMask(mask: "000.000.000-00")
+            result = CpfCnpjUtils().cnpjMask(cnpj: cpfCnpj)
+        } else {
+            print(cpfCnpj)
+            result = CpfCnpjUtils().cpfMask(cpf: cpfCnpj)
         }
-        return mask.mask(string: cpfCnpj)!
+        return result
     }
     
 }

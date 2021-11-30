@@ -1,0 +1,6 @@
+framework module CPF_CNPJ_Validators {
+  umbrella header "CPF_CNPJ_Validators-umbrella.h"
+
+  export *
+  module * { export * }
+}

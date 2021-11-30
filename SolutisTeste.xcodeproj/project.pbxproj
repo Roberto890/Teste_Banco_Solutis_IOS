@@ -727,6 +727,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CD1EC85D86DC7B00E22E2C40 /* Pods-SolutisTeste.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -746,6 +747,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 224B47D6045203B65F67C12C /* Pods-SolutisTeste.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
