@@ -45,7 +45,7 @@ struct APIRequest: APIRequestProtocol {
                     if apiResponse.statusCode > 400 {
                         completionHandler(.failure(APIErros.invalidData))
                     }else if apiResponse.statusCode != 200 {
-                        print("api status response: \(apiResponse.statusCode)")
+                        debugPrint("api status response: \(apiResponse.statusCode)")
                     }
                 }
                 
@@ -78,14 +78,14 @@ struct APIRequest: APIRequestProtocol {
                 data, response, error) in guard data != nil else {return}
                 
                 if(error != nil){
-                    print(error!)
+                    debugPrint(error!)
                     completionHandler(.failure(APIErros.invalidAPICall))
                 }
                 
                 if (response != nil){
                     let apiResponse = response as! HTTPURLResponse
                     if apiResponse.statusCode != 200 {
-                        print("api status response: \(apiResponse.statusCode)")
+                        debugPrint("api status response: \(apiResponse.statusCode)")
                     }
                 }
                 

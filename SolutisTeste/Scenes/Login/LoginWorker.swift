@@ -49,9 +49,6 @@ class LoginWorker: LoginWorkerProtocol {
     //MARK:- API Call
     func doLogin(_ user: UserLogin, _ swtEmail: Bool, _ swtBiometric: Bool, completionHandler: @escaping(Result<UserData, Error>) -> Void) {
         
-        
-        print(user.login)
-        print(user.password)
         if (utils.isValidEmail(email: user.login) == false) {
             completionHandler(.failure(LoginWorkerErrors.invalidEmail))
             return

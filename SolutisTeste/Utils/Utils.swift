@@ -102,7 +102,7 @@ extension Utils{
         if let formatedDate = dateFormatterGet.date(from: date) {
             return dateFormatterPrint.string(from: formatedDate)
         } else {
-            print("There was an error decoding the string")
+            debugPrint("There was an error decoding the string")
             return ""
         }
     }
@@ -112,7 +112,6 @@ extension Utils{
         if (cpfCnpj.count > 11) {
             result = CpfCnpjUtils().cnpjMask(cnpj: cpfCnpj)
         } else {
-            print(cpfCnpj)
             result = CpfCnpjUtils().cpfMask(cpf: cpfCnpj)
         }
         return result
