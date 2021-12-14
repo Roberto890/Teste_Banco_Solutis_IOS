@@ -15,10 +15,13 @@ import SVProgressHUD
 
     //MARK:- ViewController protocol - used in presenter
 protocol StatementViewControllerProtocol: AnyObject {
-    func displayDoLogout(viewModel: Statement.doLogout.ViewModel)
-    func displayUserData(loadUser: Statement.loadUser.ViewModel)
-    func displayLoadStatement(statementData: Statement.loadStatement.ViewModel)
-    func displayLoadStatementError(error: String)
+    func doLogout()
+    func startView()
+    
+    func callDisplayLogout()
+    func callDisplayUserData(loadUser: Statement.loadUser.ViewModel)
+    func callDisplayLoadStatement(statementData: Statement.loadStatement.ViewModel)
+    func callDisplayLoadStatementError(error: String)
 }
 
 class StatementViewController: UIViewController {
@@ -26,96 +29,56 @@ class StatementViewController: UIViewController {
     //MARK:- Variables to for interactor and router
     var interactor: StatementInteractorProtocol?
     var statementRouter: (NSObjectProtocol & StatementRouterProtocol & StatementDataPassingProtocol)?
+    var statementView: StatementViewProtocol?
         
     // MARK:- View LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadGradient()
-        let requestLoadUser = Statement.loadUser.Request()
-        interactor?.loadUserData(request: requestLoadUser)
-        let requestLoadStatement = Statement.loadStatement.Request()
-        interactor?.loadStatement(request: requestLoadStatement)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.navigationController?.navigationBar.isHidden = true
+        startView()
+        let requestLoadUser = Statement.loadUser.Request()
+        interactor?.loadUserData(request: requestLoadUser)
+        let requestLoadStatement = Statement.loadStatement.Request()
+        interactor?.loadStatement(request: requestLoadStatement)
     }
-    
-    // MARK: IBOutlets and Variables
-    @IBOutlet weak var lblName: UILabel!
-    @IBOutlet weak var lblCpfCnpj: UILabel!
-    @IBOutlet weak var lblBalance: UILabel!
-    @IBOutlet weak var statementTable: UITableView!
-    @IBOutlet weak var viewBackground: UIView!
-    
-    var statementRequest: [StatementData] = []
-        
-    // MARK: IBActions and ViewController functions
-    @IBAction func btnLogout(_ sender: Any) {
-        showAlertLogout()
+
+    func startView(){
+        statementView?.loadGradient()
     }
-    
-    func loadGradient(){
-        Utils().setGradientBackground(self.viewBackground)
-    }
-    
-    func showAlertLogout(){
-        let alert = UIAlertController(title: "Logout", message: "Realmente deseja deslogar?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancelar", style: .default, handler: nil))
-        alert.addAction(UIAlertAction(title: "Sair", style: .destructive, handler: { [self]_ in
-            statementRouter?.routeToLogin(segue: nil)
-            
-        }))
-        self.present(alert, animated: true, completion: nil)
-    }
-    
+ 
 }
 
     // MARK: - DISPLAY LOGIC
 extension StatementViewController: StatementViewControllerProtocol {
-    
-    func displayDoLogout(viewModel: Statement.doLogout.ViewModel) {
-        
-    }
-    
-    func displayUserData(loadUser: Statement.loadUser.ViewModel) {
-        DispatchQueue.main.async { [self] in
-            lblName.text = loadUser.user.formatName
-            lblCpfCnpj.text = loadUser.user.formatCpf
-            lblBalance.text = loadUser.user.formatBalance
-        }
-    }
-    
-    func displayLoadStatement(statementData: Statement.loadStatement.ViewModel) {
-        DispatchQueue.main.async { [self] in
-            SVProgressHUD.dismiss()
-            statementRequest = statementData.statement
-            statementTable.reloadData()
-        }
-    }
-    
-    func displayLoadStatementError(error: String) {
-        DispatchQueue.main.async { [self] in
-            SVProgressHUD.dismiss()
-            Utils().showAlert(error, ui: self)
-        }
-        
-    }
-}
 
-    //MARK:- Table view populating
-extension StatementViewController: UITableViewDelegate, UITableViewDataSource{
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return statementRequest.count
+    func callDisplayLogout() {
+        statementView?.displayDoLogout(controller: self)
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = statementTable.dequeueReusableCell(withIdentifier: "statementCell", for: indexPath) as! CardCellViewController
+    func doLogout() {
+        statementRouter?.routeToLogin(segue: nil)
+    }
+    
+    func callDisplayUserData(loadUser: Statement.loadUser.ViewModel) {
+        DispatchQueue.main.async { [self] in
+            statementView?.displayUserData(loadUser: loadUser)
+        }
+    }
+    
+    func callDisplayLoadStatement(statementData: Statement.loadStatement.ViewModel) {
+        DispatchQueue.main.async { [self] in
+            statementView?.displayLoadStatement(statementData: statementData)
+        }
+    }
+    
+    func callDisplayLoadStatementError(error: String) {
+        DispatchQueue.main.async { [self] in
+            statementView?.displayLoadStatementError(error: error)
+        }
         
-        cell = Utils().formatCellValues(statement: statementRequest[indexPath.row], cell: cell)
-        
-        return cell
     }
 }

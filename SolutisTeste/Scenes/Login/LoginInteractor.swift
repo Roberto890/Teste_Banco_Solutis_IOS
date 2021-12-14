@@ -56,7 +56,7 @@ class LoginInteractor: LoginInteractorProtocol, LoginDataStoreProtocol {
     
     func keyChainVerification(request: Login.loginView.Request) {
 //        worker = LoginWorker()
-        worker.keyChainVerification(request.switchLogin, request.switchBiometric){ result in
+        worker.keyChainVerification(){ result in
             switch result{
                 case.success(let user):
                 self.presenter.presentKeyChainData(.init(user: user))

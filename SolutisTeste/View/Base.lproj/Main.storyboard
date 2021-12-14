@@ -19,45 +19,18 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="2Ti-93-tAA" kind="relationship" relationship="rootViewController" id="Kq2-tO-amO"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Is3-63-NB8"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Po2-fM-Jws" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="155" y="113"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="hGX-kc-T8p">
-            <objects>
-                <viewController storyboardIdentifier="firstVc" id="2Ti-93-tAA" customClass="UINavigationController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="ABJ-Fb-fZU">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V5K-Q2-OEc">
-                                <rect key="frame" x="174" y="461" width="67" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
-                            </button>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="mvX-Fm-3uf"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="8Pb-d5-JVT"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="firstVc" id="zVn-Se-Ne3"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZKR-nc-CXs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="957.97101449275374" y="103.79464285714285"/>
+            <point key="canvasLocation" x="739" y="102"/>
         </scene>
         <!--LoginViewController-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController storyboardIdentifier="LoginViewController" title="LoginViewController" id="BYZ-38-t0r" customClass="LoginViewController" customModule="SolutisTeste" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="LoginView" customModule="SolutisTeste" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -94,7 +67,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits" textContentType="username"/>
                                                 <connections>
-                                                    <outlet property="delegate" destination="BYZ-38-t0r" id="ITJ-MJ-gfg"/>
+                                                    <outlet property="delegate" destination="8bC-Xf-vdC" id="F8m-Rd-o2R"/>
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="308" placeholderIntrinsicHeight="50" restorationIdentifier="textPassword" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P0h-es-T9s" customClass="JMMaskTextField" customModule="JMMaskTextField_Swift">
@@ -103,7 +76,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                                 <connections>
-                                                    <outlet property="delegate" destination="BYZ-38-t0r" id="iBB-6U-Zur"/>
+                                                    <outlet property="delegate" destination="8bC-Xf-vdC" id="33t-nK-rb8"/>
                                                 </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Habilitar Biometria" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NpQ-OL-I80">
@@ -122,11 +95,11 @@
                                                 <rect key="frame" x="332" y="158" width="51" height="31"/>
                                                 <color key="onTintColor" name="AccentColor"/>
                                                 <connections>
-                                                    <action selector="swtEmailChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="RFo-Qq-R3A"/>
+                                                    <action selector="swtEmailChanged:" destination="8bC-Xf-vdC" eventType="valueChanged" id="Hn8-kC-Xhx"/>
                                                 </connections>
                                             </switch>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Salvar Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dhn-mt-6E3">
-                                                <rect key="frame" x="150" y="164" width="101" height="20.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Salvar Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dhn-mt-6E3">
+                                                <rect key="frame" x="150" y="164" width="92" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -135,7 +108,7 @@
                                                 <rect key="frame" x="332" y="192.5" width="51" height="31"/>
                                                 <color key="onTintColor" name="AccentColor"/>
                                                 <connections>
-                                                    <action selector="swtBiometricChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="pyP-ra-osC"/>
+                                                    <action selector="swtBiometricChanged:" destination="8bC-Xf-vdC" eventType="valueChanged" id="Rcm-9G-2CW"/>
                                                 </connections>
                                             </switch>
                                         </subviews>
@@ -182,7 +155,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="btnLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7J8-YL-coU"/>
+                                                    <action selector="btnLogin:" destination="8bC-Xf-vdC" eventType="touchUpInside" id="hKL-X5-XdJ"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -204,28 +177,30 @@
                             <constraint firstItem="Knq-vP-kUy" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="ajS-7O-tmf"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Knq-vP-kUy" secondAttribute="bottom" id="iEa-fD-53w"/>
                         </constraints>
+                        <connections>
+                            <outlet property="btnLogin" destination="FTW-uz-57h" id="rYd-pu-he6"/>
+                            <outlet property="swtBiometric" destination="qdf-lJ-Ozq" id="iib-DW-C5W"/>
+                            <outlet property="swtEmail" destination="CsA-pZ-uWM" id="Agu-pe-zOv"/>
+                            <outlet property="txtError" destination="O9F-3g-mLG" id="eEL-ga-chQ"/>
+                            <outlet property="txtPassword" destination="P0h-es-T9s" id="DiH-lv-FZP"/>
+                            <outlet property="txtUsername" destination="df4-65-Oet" id="9wn-Du-KwA"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="3UR-A5-Mt4"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <outlet property="btnLogin" destination="FTW-uz-57h" id="lHS-XV-VSj"/>
-                        <outlet property="swtBiometric" destination="qdf-lJ-Ozq" id="Mnt-sv-klJ"/>
-                        <outlet property="swtEmail" destination="CsA-pZ-uWM" id="KvF-J8-GGM"/>
-                        <outlet property="txtError" destination="O9F-3g-mLG" id="QNz-4F-5ak"/>
-                        <outlet property="txtPassword" destination="P0h-es-T9s" id="P9w-NP-BZ7"/>
-                        <outlet property="txtUsername" destination="df4-65-Oet" id="WFf-dy-LEw"/>
                         <segue destination="Qhu-xW-gRO" kind="show" identifier="loginSegue" id="LSh-dM-BBi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="jFg-Wd-JmV">
                     <connections>
-                        <action selector="dismissKeyboardTop:" destination="BYZ-38-t0r" id="P7l-ju-SuQ"/>
+                        <action selector="dismissKeyboardTop:" destination="8bC-Xf-vdC" id="n0l-xK-deH"/>
                     </connections>
                 </tapGestureRecognizer>
                 <tapGestureRecognizer id="ioH-wg-e0C">
                     <connections>
-                        <action selector="dismissKeyboardMiddle:" destination="BYZ-38-t0r" id="wDT-My-xcu"/>
+                        <action selector="dismissKeyboardMiddle:" destination="8bC-Xf-vdC" id="tUa-UK-e3i"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -235,7 +210,7 @@
         <scene sceneID="Pp2-1o-Vu8">
             <objects>
                 <viewController storyboardIdentifier="StatementViewController" id="Qhu-xW-gRO" customClass="StatementViewController" customModule="SolutisTeste" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="PAG-WA-H4n">
+                    <view key="view" contentMode="scaleToFill" id="PAG-WA-H4n" customClass="StatementView" customModule="SolutisTeste" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -312,8 +287,8 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="Qhu-xW-gRO" id="GRY-b1-FQH"/>
-                                    <outlet property="delegate" destination="Qhu-xW-gRO" id="Tde-az-1li"/>
+                                    <outlet property="dataSource" destination="PAG-WA-H4n" id="LKL-UP-GSo"/>
+                                    <outlet property="delegate" destination="PAG-WA-H4n" id="tgD-Jh-sHa"/>
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oza-Ni-FXj">
@@ -355,7 +330,7 @@
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
                                         </state>
                                         <connections>
-                                            <action selector="btnLogout:" destination="Qhu-xW-gRO" eventType="touchUpInside" id="VN6-nh-Odb"/>
+                                            <action selector="btnLogout:" destination="PAG-WA-H4n" eventType="touchUpInside" id="SAQ-5B-xmq"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -393,19 +368,19 @@
                             <constraint firstItem="ddX-IC-DKk" firstAttribute="trailing" secondItem="ciB-vg-9cp" secondAttribute="trailing" constant="15" id="qxN-WA-J2m"/>
                             <constraint firstItem="Oza-Ni-FXj" firstAttribute="top" secondItem="PAG-WA-H4n" secondAttribute="top" id="yNa-5n-eve"/>
                         </constraints>
+                        <connections>
+                            <outlet property="lblBalance" destination="qFh-ag-g6p" id="b8Y-CU-pkX"/>
+                            <outlet property="lblCpfCnpj" destination="YDO-Lv-olt" id="wKh-Ip-vXy"/>
+                            <outlet property="lblName" destination="fgn-p2-pKd" id="BrW-wc-beM"/>
+                            <outlet property="statementTable" destination="ciB-vg-9cp" id="WeG-hU-Aa6"/>
+                            <outlet property="viewBackground" destination="Oza-Ni-FXj" id="mBk-Tj-FsQ"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="xYF-pN-YWl"/>
-                    <connections>
-                        <outlet property="lblBalance" destination="qFh-ag-g6p" id="Yd4-Cr-Ep4"/>
-                        <outlet property="lblCpfCnpj" destination="YDO-Lv-olt" id="3UI-5O-hdB"/>
-                        <outlet property="lblName" destination="fgn-p2-pKd" id="8UN-dN-mm9"/>
-                        <outlet property="statementTable" destination="ciB-vg-9cp" id="vh0-eI-Q0T"/>
-                        <outlet property="viewBackground" destination="Oza-Ni-FXj" id="xtw-Gb-jcn"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qjn-ON-20N" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2502.898550724638" y="103.79464285714285"/>
+            <point key="canvasLocation" x="2675" y="102"/>
         </scene>
     </scenes>
     <resources>

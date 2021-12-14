@@ -33,33 +33,33 @@ class LoginPresenter: LoginPresenterProtocol {
     // MARK:- Interactor functions(reicive interactor/ pass to viewController)
     func presentUserData(_ response: Login.doLogin.Response) {
         let viewModel = Login.doLogin.ViewModel(user: response.user)
-        viewController?.displayUserData(viewModel: viewModel)
+        viewController?.callDisplayUserData(viewModel: viewModel)
     }
     
     func presentLoginError(_ error: String) {
-        viewController?.displayError(error: error)
+        viewController?.callDisplayError(error: error)
     }
     
     func presentKeyChainData(_ response: Login.loginView.Response) {
         let userLogin = Login.loginView.ViewModel(user: response.user)
-        viewController?.displayKeyChainData(userLogin: userLogin)
+        viewController?.callDisplayKeyChainData(userLogin: userLogin)
     }
     
     func presentSwtVerification(_ response: Login.swtVerification.Response) {
-        viewController?.displaySwtVerification(message: response.message)
+        viewController?.callDisplaySwtVerification(message: response.message)
     }
     
     func presentSwtVerificationError(_ error: String) {
-        viewController?.displaySwtVerification(message: error)
+        viewController?.callDisplaySwtVerification(message: error)
     }
     
     func presentBiometricVerification(_ user: UserLogin) {
         let user = Login.biometricVerification.ViewModel(user: user)
-        viewController?.displayBiometricVerification(user: user)
+        viewController?.callDisplayBiometricVerification(user: user)
     }
     
     func presentBiometricError(_ error: String) {
-        viewController?.displayBiometricError(error: error)
+        viewController?.callDisplayBiometricError(error: error)
     }
     
 

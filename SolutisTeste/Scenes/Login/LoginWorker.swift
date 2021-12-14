@@ -25,10 +25,10 @@ enum LoginWorkerErrors: String, Error {
 
 protocol LoginWorkerProtocol {
     func doLogin(_ user: UserLogin, _ swtEmail: Bool, _ swtBiometric: Bool, completionHandler: @escaping(Result<UserData, Error>) -> Void)
-    func keyChainVerification(_ swtLogin: Bool, _ swtBiometric: Bool, completionHandler: @escaping(Result<UserLogin, Error>) -> Void)
+    func keyChainVerification(completionHandler: @escaping(Result<UserLogin, Error>) -> Void)
     func swtVerifications(type: String, swtEmail: Bool, swtBiometric: Bool, completionHandler: @escaping (Result<String, Error>) -> Void)
     func biometricVerification(context: LAContext,completionHandler: @escaping (Result<UserLogin, Error>) -> Void)
-    func keyChainLoad(swtEmail: Bool, swtBiometric: Bool) -> UserLogin
+    func keyChainLoad() -> UserLogin
     func keyChainSave(username: String?, password: String?)
 }
 
@@ -84,9 +84,9 @@ class LoginWorker: LoginWorkerProtocol {
     
     //MARK:- KeyChain Load data and swtVerification
     
-    func keyChainVerification(_ swtLogin: Bool, _ swtBiometric: Bool, completionHandler: @escaping(Result<UserLogin, Error>) -> Void) {
+    func keyChainVerification( completionHandler: @escaping(Result<UserLogin, Error>) -> Void) {
         
-        completionHandler(.success(keyChainLoad(swtEmail: swtLogin, swtBiometric: swtBiometric)))
+        completionHandler(.success(keyChainLoad()))
         
     }
     
@@ -127,7 +127,7 @@ extension LoginWorker {
                     return
                 }
                 
-                let userLogin = self.keyChainLoad(swtEmail: true, swtBiometric: true)
+                let userLogin = self.keyChainLoad()
                 completionHandler(.success(userLogin))
                 return
             }
@@ -146,7 +146,7 @@ extension LoginWorker {
         keychain["password"] = password
     }
     
-    func keyChainLoad(swtEmail: Bool, swtBiometric: Bool) -> UserLogin {
+    func keyChainLoad() -> UserLogin {
         let keychain = Keychain(service: "com.roberto.SolutisTeste")
         let username = keychain["username"]
         let password = keychain["password"]

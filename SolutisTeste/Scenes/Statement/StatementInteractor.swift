@@ -14,7 +14,7 @@ import UIKit
 
     //MARK:- Interactor Protocol - called in viewController
 protocol StatementInteractorProtocol {
-    func doLogout(request: Statement.doLogout.Request)
+//    func doLogout(request: Statement.doLogout.Request)
     func loadUserData(request: Statement.loadUser.Request)
     func loadStatement(request: Statement.loadStatement.Request)
 }
@@ -39,10 +39,9 @@ class StatementInteractor: StatementInteractorProtocol, StatementDataStoreProtoc
     }
     
     //MARK:- Functions
-    func doLogout(request: Statement.doLogout.Request) {        
-        let response = Statement.doLogout.Response()
-        presenter.presentSomething(response: response)
-    }
+//    func doLogout(request: Statement.doLogout.Request) {
+//        presenter.presentLogout()
+//    }
     
     func loadUserData(request: Statement.loadUser.Request) {
         let user = Statement.loadUser.Response(user: userData!)
@@ -51,7 +50,7 @@ class StatementInteractor: StatementInteractorProtocol, StatementDataStoreProtoc
     
     func loadStatement(request: Statement.loadStatement.Request) {
         let token = userData?.token
-        worker.loadStatement(token: token!){ result in
+        worker.loadStatement(token: token!) { result in
             switch result {
             case.success(let result):
                 let statementData = Statement.loadStatement.Response(statement: result)

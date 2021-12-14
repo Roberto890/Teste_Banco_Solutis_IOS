@@ -45,6 +45,9 @@ class StatementRouter: NSObject, StatementRouterProtocol, StatementDataPassingPr
         let viewController = navigation.storyboard?.instantiateViewController(withIdentifier: "StatementViewController") as! StatementViewController
         viewController.interactor = interactor
         viewController.statementRouter = self
+        let statementView = viewController.view as! StatementView
+        viewController.statementView = statementView
+        statementView.viewController = viewController
         presenter.viewController = viewController
         self.viewController = viewController
         self.dataStore = interactor

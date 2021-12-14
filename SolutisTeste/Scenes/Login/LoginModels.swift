@@ -32,10 +32,7 @@ enum Login {
     }
     
     enum loginView {
-        struct Request {
-            let switchLogin: Bool
-            let switchBiometric: Bool
-        }
+        struct Request { }
         
         struct Response {
             let user: UserLogin

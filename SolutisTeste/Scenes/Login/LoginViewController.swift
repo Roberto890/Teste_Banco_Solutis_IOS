@@ -16,13 +16,18 @@ import LocalAuthentication
 
     //MARK:- ViewController protocol - used in presenter
 protocol LoginViewControllerProtocol: AnyObject {
-    func displayUserData(viewModel: Login.doLogin.ViewModel)
-    func displayError(error: String)
-    func displayKeyChainData(userLogin: Login.loginView.ViewModel)
-    func displaySwtError(error: String)
-    func displaySwtVerification(message: String)
-    func displayBiometricVerification(user: Login.biometricVerification.ViewModel)
-    func displayBiometricError(error: String)
+    func callDisplayUserData(viewModel: Login.doLogin.ViewModel)
+    func callDisplayError(error: String)
+    func callDisplayKeyChainData(userLogin: Login.loginView.ViewModel)
+    func callDisplaySwtError(error: String)
+    func callDisplaySwtVerification(message: String)
+    func callDisplayBiometricVerification(user: Login.biometricVerification.ViewModel)
+    func callDisplayBiometricError(error: String)
+    
+    func doLogin(user: UserLogin, swtEmail: UISwitch, swtBiometric: UISwitch)
+    func switchVerification(type: String, swtEmail: Bool, swtBiometric: Bool)
+    func keyChainVerification()
+    func biometricVerification()
 }
 
 //protocol LoginRouterDelegate {
@@ -34,133 +39,111 @@ class LoginViewController: UIViewController {
     //MARK:- Variables to for interactor and router
     var interactor: LoginInteractorProtocol?
     var loginRouter: (NSObjectProtocol & LoginRouterProtocol & LoginDataPassingProtocol)?
+    var loginView: LoginViewProtocol?
 
+    override func viewDidLoad() {
+        
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        let viewRequest = Login.loginView.Request(switchLogin: swtEmail.isOn, switchBiometric: swtBiometric.isOn)
-        interactor?.keyChainVerification(request: viewRequest)
+        keyChainVerification()
         self.navigationController?.navigationBar.isHidden = true
     }
     
     // MARK: IBOutlets and Variables
-    @IBOutlet weak var swtBiometric: UISwitch!
-    @IBOutlet weak var swtEmail: UISwitch!
-    @IBOutlet weak var txtPassword: UITextField!
-    @IBOutlet weak var txtUsername: UITextField!
-    @IBOutlet weak var txtError: UILabel!
-    @IBOutlet weak var btnLogin: UIButton!
+//    @IBOutlet weak var swtBiometric: UISwitch!
+//    @IBOutlet weak var swtEmail: UISwitch!
+//    @IBOutlet weak var txtPassword: UITextField!
+//    @IBOutlet weak var txtUsername: UITextField!
+//    @IBOutlet weak var txtError: UILabel!
+//    @IBOutlet weak var btnLogin: UIButton!
     
-    // MARK: IBActions and ViewController functions
-    @IBAction func btnLogin(_ sender: Any) {
-        self.btnLogin.isEnabled = false
-        guard let login = txtUsername.text else{return}
-        guard let password = txtPassword.text else{return}
-        let userLogin = UserLogin(login: login, password: password)
-        doLogin(user: userLogin, swtLogin: swtEmail, swtBiometric: swtBiometric)
-    }
+
     
-    @IBAction func swtEmailChanged(_ sender: Any) {
-        let request = Login.swtVerification.Request(type: "Email", switchLogin: swtEmail.isOn, switchBiometric: swtBiometric.isOn)
+}
+
+//    //MARK:- TEXT FIELD Implementations
+//extension LoginViewController: UITextFieldDelegate{
+//
+//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool{
+//        txtError.isHidden = true
+//        return true
+//    }
+//}
+
+    //MARK:- LoginDisplayLogic - Presenter Return
+extension LoginViewController: LoginViewControllerProtocol {
+    
+    func switchVerification(type: String, swtEmail: Bool, swtBiometric: Bool) {
+        let request = Login.swtVerification.Request(type: "Email", switchLogin: swtEmail, switchBiometric: swtBiometric)
         interactor!.swtVerifications(request: request)
     }
-    
-    @IBAction func swtBiometricChanged(_ sender: Any) {
-        let request = Login.swtVerification.Request(type: "Biometric", switchLogin: swtEmail.isOn, switchBiometric: swtBiometric.isOn)
-        interactor!.swtVerifications(request: request)
-    }
-    
-    @IBAction func dismissKeyboardTop(_ sender: Any) {
-        self.view.endEditing(true)
-    }
-    
-    @IBAction func dismissKeyboardMiddle(_ sender: Any) {
-        self.view.endEditing(true)
-    }
-    
-    func doLogin(user: UserLogin, swtLogin: UISwitch, swtBiometric: UISwitch){
+
+    func doLogin(user: UserLogin, swtEmail: UISwitch, swtBiometric: UISwitch){
         let request = Login.doLogin.Request(user: user, switchLogin: swtEmail.isOn, switchBiometric: swtBiometric.isOn)
         interactor!.doLogin(request: request)
     }
     
-}
-
-    //MARK:- TEXT FIELD Implementations
-extension LoginViewController: UITextFieldDelegate{
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool{
-        txtError.isHidden = true
-        return true
+    func keyChainVerification(){
+        let viewRequest = Login.loginView.Request()
+        interactor?.keyChainVerification(request: viewRequest)
     }
-}
-
-    //MARK:- LoginDisplayLogic - Presenter Return
-extension LoginViewController: LoginViewControllerProtocol{
+    
+    func biometricVerification() {
+        let context = LAContext()
+        let request = Login.biometricVerification.Request(context: context)
+        self.interactor!.biometricVerification(request: request)
+    }
    
-    func displayUserData(viewModel: Login.doLogin.ViewModel) {
-        DispatchQueue.main.async {
-            self.loginRouter?.routeToStatement(segue: nil)
+    func callDisplayUserData(viewModel: Login.doLogin.ViewModel) {
+        DispatchQueue.main.async { [self] in
+            loginRouter?.routeToStatement(segue: nil)
             SVProgressHUD.dismiss()
-            self.btnLogin.isEnabled = true
+            loginView?.enableButton()
+//            self.btnLogin.isEnabled = true
         }
     }
     
-    func displayError(error: String) {
-        DispatchQueue.main.async {
+    func callDisplayError(error: String) {
+        DispatchQueue.main.async { [self] in
             SVProgressHUD.dismiss()
-            self.txtError.isHidden = false
-            self.btnLogin.isEnabled = true
+            loginView?.displayError()
         }
     }
     
-    func displayKeyChainData(userLogin: Login.loginView.ViewModel ) {
-        DispatchQueue.main.async {
-            let context = LAContext()
-            self.txtUsername.text = userLogin.user.login
-            self.txtPassword.text = userLogin.user.password
-            if self.txtUsername.text != "" {
-                self.swtEmail.isOn = true
-            }else {
-                self.swtEmail.isOn = false
-            }
-            if self.txtPassword.text != "" {
-                let request = Login.biometricVerification.Request(context: context)
-                self.swtBiometric.isOn = true
-                self.interactor!.biometricVerification(request: request)
-            }else {
-                self.swtBiometric.isOn = false
-            }
+    func callDisplayKeyChainData(userLogin: Login.loginView.ViewModel ) {
+        DispatchQueue.main.async { [self] in
+            loginView?.displayKeyChainData(userLogin: userLogin)
         }
     }
     
-    func displaySwtError(error: String) {
-        DispatchQueue.main.async {
-            Utils().showAlert(error, ui: self)
-            self.swtEmail.isOn = true
+    func callDisplaySwtError(error: String) {
+        DispatchQueue.main.async { [self] in
+            loginView?.displaySwtError(error: error)
         }
     }
     
-    func displaySwtVerification(message: String) {
-        DispatchQueue.main.async {
-            Utils().showAlert(message, ui: self)
-            self.swtEmail.isOn = true
+    func callDisplaySwtVerification(message: String) {
+        DispatchQueue.main.async { [self] in
+            loginView?.displaySwtVerification(message: message)
         }
     }
     
-    func displayBiometricVerification(user: Login.biometricVerification.ViewModel) {
-        DispatchQueue.main.async {
-            let swtLogin = self.swtEmail!
-            swtLogin.isOn = true
-            let swtBiometric = self.swtBiometric!
-            swtBiometric.isOn = true
-            self.doLogin(user: user.user, swtLogin: swtLogin, swtBiometric: swtBiometric)
+    func callDisplayBiometricVerification(user: Login.biometricVerification.ViewModel) {
+        DispatchQueue.main.async { [self] in
+            loginView?.displayBiometricVerification(user: user)
+//            let swtLogin = self.swtEmail!
+//            swtLogin.isOn = true
+//            let swtBiometric = self.swtBiometric!
+//            swtBiometric.isOn = true
+//            self.doLogin(user: user.user, swtLogin: swtLogin, swtBiometric: swtBiometric)
         }
     }
     
-    func displayBiometricError(error: String) {
+    func callDisplayBiometricError(error: String) {
         DispatchQueue.main.async {
-            Utils().showAlert(error, ui: self)
-            self.swtBiometric.isOn = false
+            self.loginView?.displayBiometricError(error: error)
         }
     }
 }

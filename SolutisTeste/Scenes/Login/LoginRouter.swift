@@ -50,6 +50,9 @@ class LoginRouter: NSObject, LoginRouterProtocol, LoginDataPassingProtocol {
         let viewController = navigation.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
         viewController.interactor = interactor
         viewController.loginRouter = self
+        let loginView = viewController.view as! LoginView
+        viewController.loginView = loginView
+        loginView.viewController = viewController
         presenter.viewController = viewController
         self.viewController = viewController
         self.dataStore = interactor

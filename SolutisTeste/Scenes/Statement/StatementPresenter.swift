@@ -14,7 +14,7 @@ import UIKit
 
     //MARK:- Presenter Protocols - called in interactor
 protocol StatementPresenterProtocol {
-    func presentSomething(response: Statement.doLogout.Response)
+//    func presentLogout()
     func presentUserData(response: Statement.loadUser.Response)
     func presentLoadStatement(response: Statement.loadStatement.Response)
     func presentLoadStatementError(_ error: String)
@@ -26,22 +26,22 @@ class StatementPresenter: StatementPresenterProtocol {
     weak var viewController: StatementViewControllerProtocol?
     
     // MARK:- Interactor functions(reicive interactor/ pass to viewController)
-    func presentSomething(response: Statement.doLogout.Response) {
-        let viewModel = Statement.doLogout.ViewModel()
-        viewController?.displayDoLogout(viewModel: viewModel)
-    }
+//    func presentLogout() {
+//        viewController?.doLogout()
+//    }
     
     func presentUserData(response: Statement.loadUser.Response) {
         let loadUser = Statement.loadUser.ViewModel(user: response.user)
-        viewController?.displayUserData(loadUser: loadUser)
+        viewController?.callDisplayUserData(loadUser: loadUser)
     }
     
     func presentLoadStatement(response: Statement.loadStatement.Response) {
         let loadStatement = Statement.loadStatement.ViewModel(statement: response.statement)
-        viewController?.displayLoadStatement(statementData: loadStatement)
+        viewController?.callDisplayLoadStatement(statementData: loadStatement)
     }
+    
     func presentLoadStatementError(_ error: String) {
-        viewController?.displayLoadStatementError(error: error)
+        viewController?.callDisplayLoadStatementError(error: error)
     }
     
 }
